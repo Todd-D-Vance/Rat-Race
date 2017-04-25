@@ -4,186 +4,186 @@
 
 > Mathematics is used in game programming, and for advanced programmers, some of the math is shown.  However, the solutions are given so one need not actually know how to solve the problems.  A reader who can write programs will do well with this book.  A reader who also has mathematics knowledge through high-school level algebra and trigonometry will do even better.
 
-##Chapter 1: Let's Create a Game!
+## Chapter 1: Let's Create a Game!
 
 Overview of the book
 
-##Chapter 2: Introduction to Unity
+## Chapter 2: Introduction to Unity
 
 Install Unity and mock-up a nonfunctional prototype
 
 
-##Chaptger 3: C# Programming I
+## Chaptger 3: C# Programming I
 
 "Hello World" in Unity
 
-##Chapter 4: Non-Game Prototype
+## Chapter 4: Non-Game Prototype
 
 Adding motion and collision to the prototype
 
-##Chapter 5: Source Control
+## Chapter 5: Source Control
 
 Protect yourself from future problems
 
-##Chapter 6: C# Programming II
+## Chapter 6: C# Programming II
 
 A crash-course in programming C#
 
-##Chapter 7: Procedural Content Generation I: Automatic Maze Generation
+## Chapter 7: Procedural Content Generation I: Automatic Maze Generation
 
 Design and automatically create a basic playable maze
 
-##Chapter 8: Artificial Intelligence: The A* Algorithm
+## Chapter 8: Artificial Intelligence: The A* Algorithm
 
 How to make enemies move toward a goal
 
-##Chapter 9: Game Mechanics Prototype
+## Chapter 9: Game Mechanics Prototype
 
 Pickups (edibles) and an enemy that chases you
 
-##Chapter 10: Designing a Game
+## Chapter 10: Designing a Game
 
 Writing your Game Design Document
 
-##Chapter 11: Creating Game Art I: The Mouse
+## Chapter 11: Creating Game Art I: The Mouse
 
 Create a mouse sprite that can be animated out of ellipses
 
-##Chapter 12: Unity Animation Framework I
+## Chapter 12: Unity Animation Framework I
 
 The mouse wags its tail and twitches its whiskers
 
-##Chapter 13: Creating Game Art II: The Cat, the Cheese, and the Walls
+## Chapter 13: Creating Game Art II: The Cat, the Cheese, and the Walls
 
 Creating more sprites and making them look good, and making the maze look much better
 
-##Chapter 14: Unity Animation Framework II: Improving the Animation
+## Chapter 14: Unity Animation Framework II: Improving the Animation
 
 The cat and mouse now run more realistically
 
-##Chapter 15: Procedural Content Generation II: Improving the Walls
+## Chapter 15: Procedural Content Generation II: Improving the Walls
 
 Make the maze look less like midtown Manhattan and more like lower Manhattan
 
-##Chapter 16: Game States I: Win and Lose
+## Chapter 16: Game States I: Win and Lose
 
 Adding a finite-state machine to the game to handle game states, and
 introduction to Unity's User Interface framework
 
-##Chapter 17: Game States II:  Attract Mode
+## Chapter 17: Game States II:  Attract Mode
 
 Setting up title screen, high score screen, and so on before the game is played
 
-##Chapter 18: Game States III: Improving Game Behavior
+## Chapter 18: Game States III: Improving Game Behavior
 
 New level when all cheese is eatent
 
-##Chapter 19: Cat Box, More Cats, and Teleportation Tunnels
+## Chapter 19: Cat Box, More Cats, and Teleportation Tunnels
 
 Adding the central portion of the maze: a box full of cats and tunnels
 that teleport you
 
-##Chapter  20: AI II: Cat Personalities and Flee from Player
+## Chapter  20: AI II: Cat Personalities and Flee from Player
 
 Add a finite-state machien to the AI so cats have different
 personalities and different modes.  Cats can now be eaten if the mouse
 eats the growth cheese.
 
-##Chapter 21: Unity Sound Framework
+## Chapter 21: Unity Sound Framework
 
 Make a music-player script and compose game music for it.  Also,
 create sound effects in Audacity.  Also some random bug fixes.
 
-##Chapter 22: Options Menus and Saving Values
+## Chapter 22: Options Menus and Saving Values
 
 Unity's persistance framework and saving game preferences
 
-##Chapter 23: Review and Refactor
+## Chapter 23: Review and Refactor
 
 An introduction to refactoring, including a better music player and a
 better game state manager.  More random bug fixes.
 
-##Chapter 24: Game State IV: Making Every State Work
+## Chapter 24: Game State IV: Making Every State Work
 
 Walking through every state of the game and making sure it complies
 with the GDD.
 
-##Chapter 25: The Demo State
+## Chapter 25: The Demo State
 
 Write code to record a demo and play it back
 
-##Chapter 26: Game State V: Continuing Where We Left Off
+## Chapter 26: Game State V: Continuing Where We Left Off
 
 We interrupted Chapter 24 to fix the demo state, which was a
 full-chapter rabbit hole.  We now resume our regular programming,
 including adding a scripted cutscene.
 
-##Chapter 27: Game State VI: Post Game Mode
+## Chapter 27: Game State VI: Post Game Mode
 
 The cutscene was another rabbit hole.  We resume with what happens
 when the game is over: save a high score, enter your name, back to
 title screen.
 
-##Chapter 28: Improving the Game
+## Chapter 28: Improving the Game
 
 We play-test the game and write down everything we don't like.  Then we fix it.
 
-##Chapter 29: Additional Edibles and Hazards
+## Chapter 29: Additional Edibles and Hazards
 
 Another rabit hole: add pickups like the cherries in Pac-Man.
 
-##Chapter 30: Fixing the Remaining Issues
+## Chapter 30: Fixing the Remaining Issues
 
 Back to the list of issues to fix.
 
-##Chapter 31: Extensive Play Testing
+## Chapter 31: Extensive Play Testing
 
 We are not done.  We still have to discover and fix issues.  We add a
 cheat code system to make this easier.
 
-##Chapter 32: Building for Deployment
+## Chapter 32: Building for Deployment
 
 Get the game running outside the Unity editor, on real machines
 
-##Chapter 33: Touch Screen Controls
+## Chapter 33: Touch Screen Controls
 
 Mobile devicies typically do not have keyboards.
 
-##Chapter 34: More Features
+## Chapter 34: More Features
 
 Anything else to do before we publish?
 
-##Chapter 35: Publishing
+## Chapter 35: Publishing
 
 Time to make money, or at least get the game out there where people can play it.
 
-##Appendix A: Selected solutions to exercises
+## Appendix A: Selected solutions to exercises
 
-##Appendix B: Installing Firefox and Acrobat Reader
+## Appendix B: Installing Firefox and Acrobat Reader
 
-##Bibliography
+## Bibliography
 
 Some additional reading
 
 =============================================
 
-#Game Design Document
+# Game Design Document
 
-##Marketing Statement
+## Marketing Statement
 
 Remember the Golden Age of the arcade, around the 1980s or so? It was a PacMan-eat-dot industry, where a game that didn't earn a quarter every three minutes got removed and replaced. The games were built to have lights and sounds to attract the player, and then to challenge the player enough that he's likely to lose the game...fast. Still, from time to time, a player would do really well and get on the high score list.
 
 We shall build a game of this type.
 
-##Elevator Ptich
+## Elevator Ptich
 The player controls a mouse who must eat all the cheese in the maze without being eaten by some very aggressive cats.
 
-##Technology
+## Technology
 We shall use the Unity game engine, whose software development editor and integrated development environment (IDE) runs on the PC and Macintosh, and can deploy games than run on the PC and Mac as well as the web and mobile devices and Linux.
 
 We shall use Git for source control.
 
-##Features
+## Features
 
  * 2D classic arcade action
  * Written with \software{Unity} 5.6 and \csharp
@@ -198,7 +198,7 @@ We shall use Git for source control.
  * Published to multiple locations for multiple platforms
  * and more...
 
-##Mechanics
+## Mechanics
 
  * Player is controled by a keyboard, joystick, game pad, or (for mobile devices) a touch screen, with inputs representing up, down, left, and right.  An input will change the direction of the player sprite (the mouse) to that direction if it is possible to go that direction.  Upon reaching an obstacle, the sprite will stop until a valid directional input is given.
 
@@ -212,7 +212,7 @@ We shall use Git for source control.
 
  * Scoring is based on cheese eaten, cats eaten, bonus pickups eaten, and levels achieved.  Top scores are saved.
 
-##Attract Mode
+## Attract Mode
 
  * When the game is not in progress, it cycles through a title screen, a high score screen, a details screen, and a demo screen.  The demo is a video clip of sample gameplay.
 
@@ -220,11 +220,11 @@ We shall use Git for source control.
 
  * Attract mode ends when a ``Play'' button is pressed, and resumes on end of game (perhaps with a high score screen interlude).
 
-##Assets
+## Assets
 
 Assets include an animated mouse, animated cats, cheese (dots), walls pieces, maze designs, sound effect clips, and level music.
 
-##Ideas for Future Development
+## Ideas for Future Development
 
  * Adrenaline: start with high reserve, low usage.  If mouse is near cat, can use it to go faster, but reserves are depleted and mouse slows down.  Need a ``run key'' (or maybe double-tap direction key) to signal ``use the adrenaline now''
 
@@ -240,7 +240,7 @@ Assets include an animated mouse, animated cats, cheese (dots), walls pieces, ma
 
  * Dangerous ``pickups'' like a marching mousetrap?
 
-##Game States
+## Game States
 
 
 The game will have the following states:
