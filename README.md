@@ -76,7 +76,7 @@ Setting up title screen, high score screen, and so on before the game is played
 
 ## Chapter 18: Game States III: Improving Game Behavior
 
-New level when all cheese is eatent
+New level when all cheese is eaten
 
 ## Chapter 19: Cat Box, More Cats, and Teleportation Tunnels
 
@@ -85,7 +85,7 @@ that teleport you
 
 ## Chapter  20: AI II: Cat Personalities and Flee from Player
 
-Add a finite-state machien to the AI so cats have different
+Add a finite-state machine to the AI so cats have different
 personalities and different modes.  Cats can now be eaten if the mouse
 eats the growth cheese.
 
@@ -179,7 +179,7 @@ We shall build a game of this type.
 The player controls a mouse who must eat all the cheese in the maze without being eaten by some very aggressive cats.
 
 ## Technology
-We shall use the Unity game engine, whose software development editor and integrated development environment (IDE) runs on the PC and Macintosh, and can deploy games than run on the PC and Mac as well as the web and mobile devices and Linux.
+We shall use the Unity game engine, whose software development editor and integrated development environment (IDE) runs on the PC and Macintosh, and can deploy games that run on the PC and Mac as well as the web and mobile devices and Linux.
 
 We shall use Git for source control.
 
