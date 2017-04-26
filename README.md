@@ -1,3 +1,5 @@
+![Rat Race!](https://github.com/Todd-D-Vance/Rat-Race/blob/master/Rat3D.png)
+
 # Rat Race: Creating a 2D Classic Arcade Style Maze Chase Game in Unity 3D
 
 > Build a complete feature-filled and polished classic 2D arcade game from start to finish in Unity.  Unlike other books of this type, this book is _detailed_ and covers a wide range of game-making aspects, while focusing on making one game as good as possible.  
