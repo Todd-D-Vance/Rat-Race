@@ -1,6 +1,6 @@
 # Rat Race: Creating a 2D Classic Arcade Style Maze Chase Game in Unity 3D
 
-> Build a complete feature-filled and polished classic 2D arcade game from start to finish in Unity.  Unlike other books of this type, this book is \emph{detailed} and covers a wide range of game-making aspects, while focusing on making one game as good as possible.  
+> Build a complete feature-filled and polished classic 2D arcade game from start to finish in Unity.  Unlike other books of this type, this book is _detailed_ and covers a wide range of game-making aspects, while focusing on making one game as good as possible.  
 
 > Mathematics is used in game programming, and for advanced programmers, some of the math is shown.  However, the solutions are given so one need not actually know how to solve the problems.  A reader who can write programs will do well with this book.  A reader who also has mathematics knowledge through high-school level algebra and trigonometry will do even better.
 
@@ -13,7 +13,7 @@ Overview of the book
 Install Unity and mock-up a nonfunctional prototype
 
 
-## Chaptger 3: C# Programming I
+## Chapter 3: C# Programming I
 
 "Hello World" in Unity
 
@@ -96,7 +96,7 @@ create sound effects in Audacity.  Also some random bug fixes.
 
 ## Chapter 22: Options Menus and Saving Values
 
-Unity's persistance framework and saving game preferences
+Unity's persistence framework and saving game preferences
 
 ## Chapter 23: Review and Refactor
 
@@ -130,7 +130,7 @@ We play-test the game and write down everything we don't like.  Then we fix it.
 
 ## Chapter 29: Additional Edibles and Hazards
 
-Another rabit hole: add pickups like the cherries in Pac-Man.
+Another rabbit hole: add pickups like the cherries in Pac-Man.
 
 ## Chapter 30: Fixing the Remaining Issues
 
@@ -147,7 +147,7 @@ Get the game running outside the Unity editor, on real machines
 
 ## Chapter 33: Touch Screen Controls
 
-Mobile devicies typically do not have keyboards.
+Mobile devices typically do not have keyboards.
 
 ## Chapter 34: More Features
 
@@ -171,11 +171,11 @@ Some additional reading
 
 ## Marketing Statement
 
-Remember the Golden Age of the arcade, around the 1980s or so? It was a PacMan-eat-dot industry, where a game that didn't earn a quarter every three minutes got removed and replaced. The games were built to have lights and sounds to attract the player, and then to challenge the player enough that he's likely to lose the game...fast. Still, from time to time, a player would do really well and get on the high score list.
+Remember the Golden Age of the arcade, around the 1980s or so? It was a Pac Man-eat-dot industry, where a game that didn't earn a quarter every three minutes got removed and replaced. The games were built to have lights and sounds to attract the player, and then to challenge the player enough that he's likely to lose the game...fast. Still, from time to time, a player would do really well and get on the high score list.
 
 We shall build a game of this type.
 
-## Elevator Ptich
+## Elevator Pitch
 The player controls a mouse who must eat all the cheese in the maze without being eaten by some very aggressive cats.
 
 ## Technology
@@ -186,7 +186,7 @@ We shall use Git for source control.
 ## Features
 
  * 2D classic arcade action
- * Written with \software{Unity} 5.6 and \csharp
+ * Written with Unity 5.6 and C Sharp
  * Artificial Intelligence (AI) for the cats
  * Grid-based automated level building and Procedural Content Generation (PCG)
  * Score keeping with high-score saving
@@ -200,13 +200,13 @@ We shall use Git for source control.
 
 ## Mechanics
 
- * Player is controled by a keyboard, joystick, game pad, or (for mobile devices) a touch screen, with inputs representing up, down, left, and right.  An input will change the direction of the player sprite (the mouse) to that direction if it is possible to go that direction.  Upon reaching an obstacle, the sprite will stop until a valid directional input is given.
+ * Player is controlled by a keyboard, joystick, game pad, or (for mobile devices) a touch screen, with inputs representing up, down, left, and right.  An input will change the direction of the player sprite (the mouse) to that direction if it is possible to go that direction.  Upon reaching an obstacle, the sprite will stop until a valid directional input is given.
 
  * The enemy sprites (cats) will be controlled by AI and will try to catch the mouse.  If the mouse is caught, a life is lost.  Initially, the mouse has three lives but new lives are sometimes given as a bonus.  When all lives are lost, the game is over.
 
  * The mouse must eat all the dots (cheese) in the maze, at which time a newer, harder maze is given (levelling up).  
 
- * Special ``growth hormone'' cheese gives the mouse the ability to chase and eat the cats for a short period of time.
+ * Special "growth hormone" cheese gives the mouse the ability to chase and eat the cats for a short period of time.
 
  * Tunnels allow the mouse (or cats) to teleport, thus confusing the AI of the cats.  
 
@@ -218,7 +218,7 @@ We shall use Git for source control.
 
  * An options button, leading to an options screen, is available.  User-selectable options include music volume, sound effects volume, and perhaps other options.
 
- * Attract mode ends when a ``Play'' button is pressed, and resumes on end of game (perhaps with a high score screen interlude).
+ * Attract mode ends when a "Play" button is pressed, and resumes on end of game (perhaps with a high score screen interlude).
 
 ## Assets
 
@@ -226,7 +226,7 @@ Assets include an animated mouse, animated cats, cheese (dots), walls pieces, ma
 
 ## Ideas for Future Development
 
- * Adrenaline: start with high reserve, low usage.  If mouse is near cat, can use it to go faster, but reserves are depleted and mouse slows down.  Need a ``run key'' (or maybe double-tap direction key) to signal ``use the adrenaline now''
+ * Adrenaline: start with high reserve, low usage.  If mouse is near cat, can use it to go faster, but reserves are depleted and mouse slows down.  Need a "run key" (or maybe double-tap direction key) to signal "use the adrenaline now"
 
  * Eating cats makes mouse full when growth hormone runs out and he walks slower for a time
 
@@ -238,7 +238,7 @@ Assets include an animated mouse, animated cats, cheese (dots), walls pieces, ma
 
  * Special pickups for special powers?
 
- * Dangerous ``pickups'' like a marching mousetrap?
+ * Dangerous "pickups" like a marching mousetrap?
 
 ## Game States
 
@@ -323,7 +323,7 @@ After a short time, the state transitions to the State: {Game Mode: Play} state.
 
 If the Button: {Options} button is pressed, the state transitions to the State: {Game Mode: Options} state.
 
-When the animation finishes, a life is lost.  If there are no more lives, the state transitions to the State: {Game Mode: Game Over} state.  Otherwise, the state transitions to the State: {Game Mode: Reset Player} state. 
+When the animation finishes, a life is lost.  If there are no more lives, the state transitions to the State: {Game Mode: Game Over} state.  Otherwise, the state transitions to the State: {Game Mode: Reset Player} state.
 
  * State: {Game Mode: Game Over} A game over message is shown and the player is removed from play.  The enemies may continue to gloat.
 
