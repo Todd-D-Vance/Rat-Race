@@ -169,6 +169,8 @@ Some additional reading
 
 =============================================
 
+![Rat Race!](https://github.com/Todd-D-Vance/Rat-Race/blob/master/ratrace.png)
+
 # Game Design Document
 
 ## Marketing Statement
