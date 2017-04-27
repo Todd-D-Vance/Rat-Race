@@ -75,6 +75,25 @@ public class AIController : MonoBehaviour {
         if (dx != 0 || dy != 0) {
             rb.velocity = new Vector2(dx, dy) * speed;
         }
+
+        Animator animator = GetComponent<Animator>();
+        if (animator) {
+            animator.SetBool("IsRunning", (rb.velocity.x != 0 ||
+            rb.velocity.y != 0));
+        } else {
+            Debug.LogWarning("Missing Cat Animator");
+        }
+
+        if (dx > 0) {
+            transform.rotation = Quaternion.Euler(0, 0, -90);
+        } else if (dx < 0) {
+            transform.rotation = Quaternion.Euler(0, 0, 90);
+        } else if (dy > 0) {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        } else if (dy < 0) {
+            transform.rotation = Quaternion.Euler(0, 0, 180);
+        }
+
         //correct position
         if (dx != 0) {
             int y = Mathf.RoundToInt(transform.position.y);
