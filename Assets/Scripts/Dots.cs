@@ -40,6 +40,8 @@ public class Dots : MonoBehaviour {
         }
         if (numDots > 0) {
             readyToGo = true;
+            Game game = FindObjectOfType<Game>();
+            game.state = Game.State.PLAY;
         }
     }
 }
