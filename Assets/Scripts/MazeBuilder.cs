@@ -12,10 +12,25 @@ public class MazeBuilder : MonoBehaviour {
 
     private bool[,] grid;
 
+
     // Use this for initialization
     void Start() {
         Initialize();
-        BasicMaze(10, 10);
+
+        //upper maze
+        CarveMazeSection(8, 4, 1, xSize - 2, 1, ySize / 2 - 4);
+
+        //lower maze, leaving several rows for a cat box
+        CarveMazeSection(8, 4, 1, xSize - 2, ySize / 2 + 4, ySize / 2 - 5);
+
+        //join the two halves together
+        CarveColumn(2, 1, ySize - 2);
+        CarveColumn(xSize - 3, 1, ySize - 2);
+
+        //build tunnels
+        CarveRow(ySize / 2, 1, 15);
+        CarveRow(ySize / 2, xSize - 17, 15);
+
         Draw();
     }
 
@@ -33,54 +48,62 @@ public class MazeBuilder : MonoBehaviour {
         }
     }
 
-    public void BasicMaze(int m, int n) {
-        CarveRow(2);
-        CarveRow(ySize - 3);
-        CarveColumn(2);
-        CarveColumn(xSize - 3);
 
+    /**
+     * Assumptions: numColumns and numRows both 
+    * at least 2; xSize and ySize both at least 7; 
+    * startX and startX+xSize-1 in range 0 through global xSize - 1
+    * startY, startY+ySize-1 in range 0 through global ySize - 1
+    */
+    public void CarveMazeSection(int numCols, int numRows, int startX, int xSize, int startY, int ySize) {
 
-        int[] RowWallWidth = new int[m - 1];
-        for (int i = 0; i < m - 1; i++) {
+        CarveRow(startY + 1, startX, xSize);
+        CarveRow(startY + ySize - 2, startX, xSize);
+        CarveColumn(startX + 1, startY, ySize);
+        CarveColumn(startX + xSize - 2, startY, ySize);
+
+        int[] RowWallWidth = new int[numRows - 1];
+        for (int i = 0; i < numRows - 1; i++) {
             RowWallWidth[i] = 1;
         }
-        for (int i = 0; i < ySize - 2 - 4 * m; i++) {
-            int j = Random.Range(0, m - 1);
+        for (int i = 0; i < ySize - 2 - 4 * numRows; i++) {
+            int j = Random.Range(0, numRows - 1);
             RowWallWidth[j]++;
         }
         int r = 5;
-        for (int i = 0; i < m - 2; i++) {
+        for (int i = 0; i < numRows - 2; i++) {
             r += RowWallWidth[i];
-            CarveRow(r);
+            CarveRow(r + startY - 1, startX, xSize);
             r += 3;
         }
 
-        int[] ColWallWidth = new int[n - 1];
-        for (int i = 0; i < n - 1; i++) {
+
+        int[] ColWallWidth = new int[numCols - 1];
+        for (int i = 0; i < numCols - 1; i++) {
             ColWallWidth[i] = 1;
         }
-        for (int i = 0; i < xSize - 2 - 4 * n; i++) {
-            int j = Random.Range(0, n - 1);
+        for (int i = 0; i < xSize - 2 - 4 * numCols; i++) {
+            int j = Random.Range(0, numCols - 1);
             ColWallWidth[j]++;
         }
         int c = 5;
-        for (int i = 0; i < n - 2; i++) {
+        for (int i = 0; i < numCols - 2; i++) {
             c += ColWallWidth[i];
-            CarveColumn(c);
+            CarveColumn(c + startX - 1, startY, ySize);
             c += 3;
         }
 
         //now connect some "wall islands" together, first beteen rows
-        r = 5;
-        for (int i = 0; i < m - 2; i++) {
+        r = 4 + startY;
+        for (int i = 0; i < numRows - 2; i++) {
             r += RowWallWidth[i];
 
             // r-1, r, r+1 are y values of a player path
 
             if (Random.value > 0.5) {
 
-                c = 5;
-                for (int j = 0; j < n - 2; j++) {
+                c = 4 + startX;
+                for (int j = 0; j < numCols - 2; j++) {
                     if (Random.value > 0.5) {
                         for (int k = c; k < c + ColWallWidth[j]; k++) {
                             grid[k - 1, r - 1] = true;
@@ -96,18 +119,17 @@ public class MazeBuilder : MonoBehaviour {
             r += 3;
         }
 
-
         //... and then between columns
-        c = 5;
-        for (int i = 0; i < n - 2; i++) {
+        c = 4 + startX;
+        for (int i = 0; i < numCols - 2; i++) {
             c += ColWallWidth[i];
 
             // c-1, c, c+1 are x values of a player path
 
             if (Random.value > 0.5) {
 
-                r = 5;
-                for (int j = 0; j < m - 2; j++) {
+                r = 4 + startY;
+                for (int j = 0; j < numRows - 2; j++) {
                     if (Random.value > 0.5) {
                         for (int k = r; k < r + RowWallWidth[j]; k++) {
                             grid[c - 1, k - 1] = true;
@@ -123,9 +145,11 @@ public class MazeBuilder : MonoBehaviour {
             c += 3;
         }
 
+
+
         //eliminate dead ends
-        for (int x = 2; x < xSize - 2; x++) {
-            for (int y = 2; y < ySize - 2; y++) {
+        for (int x = startX + 2; x < startX + xSize - 2; x++) {
+            for (int y = startY + 2; y < startY + ySize - 2; y++) {
 
                 if (!grid[x, y]) {//player path space
 
@@ -208,16 +232,16 @@ public class MazeBuilder : MonoBehaviour {
 
     }
 
-    public void CarveRow(int y) {
-        for (int x = 1; x <= xSize - 2; x++) {
+    public void CarveRow(int y, int startX, int xSize) {
+        for (int x = startX; x <= startX + xSize - 1; x++) {
             for (int j = y - 1; j <= y + 1; j++) {
                 grid[x, j] = false;
             }
         }
     }
 
-    public void CarveColumn(int x) {
-        for (int y = 1; y <= ySize - 2; y++) {
+    public void CarveColumn(int x, int startY, int ySize) {
+        for (int y = startY; y <= startY + ySize - 1; y++) {
             for (int j = x - 1; j <= x + 1; j++) {
                 grid[j, y] = false;
             }
@@ -233,7 +257,7 @@ public class MazeBuilder : MonoBehaviour {
 
                     //instantiate solid regions
                     int directions = 0;
-                 
+
                     if (WallContinuesUp(x, y)) {//up
                         directions += 1;
                     }
@@ -254,7 +278,7 @@ public class MazeBuilder : MonoBehaviour {
                         directions += 16;
                     }
 
-                    if ((directions & 3) == 3 && !WallUpRightConcave(x,y)) {//up right
+                    if ((directions & 3) == 3 && !WallUpRightConcave(x, y)) {//up right
                         Instantiate(solidRegions[1], new Vector3(x, y, 9),
                         Quaternion.identity, transform);
                         directions += 32;
