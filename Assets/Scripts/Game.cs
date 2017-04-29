@@ -8,16 +8,29 @@ public class Game : MonoBehaviour {
 
     public State state = State.INTRO;
 
+    private Dots dots;
+
     // Use this for initialization
     void Start() {
-
+        dots = FindObjectOfType<Dots>();
     }
 
     // Update is called once per frame
     void Update() {
-        if (state == State.PLAY && CountDots() <= 0) {
-            state = State.END_LEVEL;
-            SceneManager.LoadScene("Win");
+        if (!dots) {
+            dots = FindObjectOfType<Dots>();
+        }
+        switch (state) {
+            case State.PLAY:
+                if (CountDots() <= 0) {
+                    state = State.END_LEVEL;
+                }
+                break;
+            case State.END_LEVEL:
+                Invoke("LevelUp", 1.0f);
+                break;
+
+                //tODO add more
         }
     }
 
@@ -31,6 +44,11 @@ public class Game : MonoBehaviour {
             count++;
         }
         return count;
+    }
+
+    void LevelUp() {
+        //TODO: level up sound/anamation
+        SceneManager.LoadScene("Win");
     }
 
     public enum State {

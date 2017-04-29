@@ -5,12 +5,20 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public float speed = 10.0f;
+    public Vector3 InitialPosition;
+    public Vector3 InitialRotation;
+
 
     private MazeBuilder maze = null;
+    private Game game;
+    private Animator animator;
+    private Rigidbody2D rb;
 
     // Use this for initialization
     void Start() {
-
+        game = FindObjectOfType<Game>();
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -21,6 +29,10 @@ public class PlayerController : MonoBehaviour {
             Move(dx, dy);
         } else {
             maze = FindObjectOfType<MazeBuilder>();
+        }
+        if (game.state == Game.State.DEATH) {
+            //TODO: play death sound, do death animation
+            Invoke("ResetPlayer", 1.0f);
         }
     }
 
@@ -48,15 +60,18 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Move(int dx, int dy) {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (!rb) {
-            throw new UnityException("Missing Rigidbody2D component");
+        if (!game || game.state != Game.State.PLAY) {
+            if (animator) {
+                animator.SetBool("IsRunning", false);
+                rb.velocity = Vector2.zero;
+            }
+            return;
         }
+
         if (dx != 0 || dy != 0) {
             rb.velocity = new Vector2(dx, dy) * speed;
         }
 
-        Animator animator = GetComponent<Animator>();
         if (animator) {
             animator.SetBool("IsRunning", (rb.velocity.x != 0 ||
             rb.velocity.y != 0));
@@ -84,5 +99,20 @@ public class PlayerController : MonoBehaviour {
             int x = Mathf.RoundToInt(transform.position.x);
             transform.position = new Vector3(x, transform.position.y, transform.position.z);
         }
+    }
+
+    void ResetPlayer() {
+        game.state = Game.State.RESET_PLAYER;
+        transform.position = InitialPosition;
+        transform.eulerAngles = InitialRotation;
+        foreach (AIController enemy in
+        FindObjectsOfType<AIController>()) {
+            enemy.ResetEnemy();
+        }
+        Invoke("Play", 1.0f);
+    }
+
+    void Play() {
+        game.state = Game.State.PLAY;
     }
 }

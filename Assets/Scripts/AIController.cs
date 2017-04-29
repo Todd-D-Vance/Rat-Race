@@ -5,15 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class AIController : MonoBehaviour {
     public float speed = 10.0f;
+    public Vector3 InitialPosition;
+    public Vector3 InitialRotation;
 
     private MazeBuilder maze;
     private PlayerController player;
     private AStar aStar;
-
+    private Game game;
+    private Animator animator;
+    private Rigidbody2D rb;
 
     // Use this for initialization
     void Start() {
-
+        game = FindObjectOfType<Game>();
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -28,7 +34,7 @@ public class AIController : MonoBehaviour {
             aStar = FindObjectOfType<AStar>();
 
             BuildPathsFromMaze();
-        }
+        }    
     }
 
     void GetInput(out int dx, out int dy) {
@@ -68,16 +74,19 @@ public class AIController : MonoBehaviour {
         }
     }
 
-    void Move(int dx, int dy) {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (!rb) {
-            throw new UnityException("Missing Rigidbody2D component");
+    void Move(int dx, int dy) {  
+        if (!game || game.state != Game.State.PLAY) {
+            if (animator) {
+                animator.SetBool("IsRunning", false);
+                rb.velocity = Vector2.zero;
+            }
+            return;
         }
+
         if (dx != 0 || dy != 0) {
             rb.velocity = new Vector2(dx, dy) * speed;
         }
 
-        Animator animator = GetComponent<Animator>();
         if (animator) {
             animator.SetBool("IsRunning", (rb.velocity.x != 0 ||
             rb.velocity.y != 0));
@@ -119,8 +128,13 @@ public class AIController : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Player") {
-            SceneManager.LoadScene("GameOver");
+            game.state = Game.State.DEATH;
         }
+    }
+
+    public void ResetEnemy() {
+        transform.position = InitialPosition;
+        transform.eulerAngles = InitialRotation;
     }
 
 }
