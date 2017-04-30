@@ -10,29 +10,16 @@ public class AStar : MonoBehaviour {
 
     private int[,] grid;
 
-    // Use this for initialization
-    public void InitAI(int x, int y) {
-        destination.x = x;
-        destination.y = y;
-        MazeBuilder mb = GetComponent<MazeBuilder>();
-        Initialize(mb.xSize, mb.ySize);
-        for (int xx = 0; xx < mb.xSize; xx++) {
-            for (int yy = 0; yy < mb.ySize; yy++) {
-                if (!mb.IsPlayerSpace(xx, yy)) {
-                    AddBlocked(new GridPoint() { x = xx, y = yy });
-                }
-            }
-        }
-        BuildPaths(destination);
-    }
 
+    //call this whenever the destination changes
     public void RebuildAI(int x, int y) {
         destination.x = x;
         destination.y = y;
-        Reset();
+        ResetAI();
         BuildPaths(destination);
     }
 
+    //use this to initialize
     public void Initialize(int xSize, int ySize) {
         grid = new int[xSize, ySize];
         for (int x = 0; x < xSize; x++) {
@@ -42,7 +29,7 @@ public class AStar : MonoBehaviour {
         }
     }
 
-    public void Reset() {
+    public void ResetAI() {
         for (int x = 0; x < grid.GetLength(0); x++) {
             for (int y = 0; y < grid.GetLength(1); y++) {
                 if (grid[x, y] >= 0) {
@@ -52,6 +39,7 @@ public class AStar : MonoBehaviour {
         }
     }
 
+    //add locations that are inaccessible (array)
     public void AddBlocked(params GridPoint[] gps) {
         foreach (GridPoint gp in gps) {
             grid[gp.x, gp.y] = -1;
@@ -62,6 +50,7 @@ public class AStar : MonoBehaviour {
         }
     }
 
+    //add locations that are inaccessible (hash set)
     public void AddBlocked(HashSet<GridPoint> gps) {
         foreach (GridPoint gp in gps) {
             grid[gp.x, gp.y] = -1;
@@ -72,7 +61,8 @@ public class AStar : MonoBehaviour {
         }
     }
 
-    public void BuildPaths(GridPoint destination) {
+
+    private void BuildPaths(GridPoint destination) {
         Queue<GridPoint> frontier = new Queue<GridPoint>();
         if (grid[destination.x, destination.y] > 0) {
             frontier.Enqueue(destination);
@@ -110,6 +100,7 @@ public class AStar : MonoBehaviour {
         }
     }
 
+    //number of steps from specified location to destination
     public int GetDist(int x, int y) {
         if (x < 0 || y < 0 || x >= grid.GetLength(0) || y >= grid.GetLength(1)) {
             return -1;
@@ -120,6 +111,7 @@ public class AStar : MonoBehaviour {
         return grid[x, y];
     }
 
+    //get next point for moving toward destination
     public bool GetNext(GridPoint start, out GridPoint next) {
         next = start;
         if (grid[start.x, start.y] <= 0 || grid[start.x, start.y] == int.MaxValue) {
@@ -149,6 +141,7 @@ public class AStar : MonoBehaviour {
         return true;
     }
 
+    //get previous point, for moving away from destination
     public bool GetPrev(GridPoint start, out GridPoint prev) {
         prev = start;
         if (grid[start.x, start.y] <= 0 || grid[start.x, start.y] == int.MaxValue) {
