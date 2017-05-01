@@ -10,12 +10,21 @@ public class AStar : MonoBehaviour {
 
     private int[,] grid;
 
+    public GameObject[] avoid;
 
     //call this whenever the destination changes
     public void RebuildAI(int x, int y) {
         destination.x = x;
         destination.y = y;
         ResetAI();
+        foreach (GameObject a in avoid) {
+            int ax = Mathf.RoundToInt(a.transform.position.x);
+            int ay = Mathf.RoundToInt(a.transform.position.y);
+            if (grid[ax, ay] > 0) {
+                grid[ax, ay] = 100;//make cats undesireable to each other
+            }
+
+        }
         BuildPaths(destination);
     }
 
