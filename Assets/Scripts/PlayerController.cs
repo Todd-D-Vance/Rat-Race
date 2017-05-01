@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D rb;
     private AIController aCat;
     private BoxCollider2D theCollider;
+    private SoundPlayer sound = SoundPlayer.instance;
+
 
     // Use this for initialization
     void Start() {
@@ -38,7 +40,6 @@ public class PlayerController : MonoBehaviour {
             //TODO: play death sound, do death animation
             Invoke("ResetPlayer", 1.0f);
         }
-        Debug.Log("cat: " + aCat.name + ": flee=" + aCat.flee);
         if (aCat.flee > 0) {
             transform.localScale = new Vector3(2, 2, 2);
             theCollider.size = new Vector2(1.35f, 1.35f);
@@ -99,6 +100,14 @@ public class PlayerController : MonoBehaviour {
             transform.rotation = Quaternion.Euler(0, 0, 0);
         } else if (dy < 0) {
             transform.rotation = Quaternion.Euler(0, 0, 180);
+        }
+
+        if (Random.value < Time.deltaTime) {
+            if (aCat.flee > 0) {
+                sound.BigSqueak();
+            } else {
+                sound.Squeak();
+            }
         }
 
         //Teleport

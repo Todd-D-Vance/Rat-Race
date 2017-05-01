@@ -16,6 +16,7 @@ public class AIController : MonoBehaviour {
     private Animator animator;
     private Rigidbody2D rb;
     private BoxCollider2D theCollider;
+    private SoundPlayer sound = SoundPlayer.instance;
 
     private int initDx = 0;
     private int initDy = 0;
@@ -53,6 +54,10 @@ public class AIController : MonoBehaviour {
             flee -= Time.deltaTime;
         } else {
             flee = 0;
+        }
+
+        if (deployed && Mathf.RoundToInt((transform.position - player.transform.position).magnitude) == 10) {
+            sound.Meow();
         }
     }
 
@@ -172,6 +177,7 @@ public class AIController : MonoBehaviour {
         if (collision.gameObject.tag == "Player") {
             if (player && flee > 0) {
                 //Eat the cat!
+                sound.BigGulp();
                 ResetEnemy();
             } else {
                 game.state = Game.State.DEATH;
