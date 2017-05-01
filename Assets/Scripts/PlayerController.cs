@@ -13,12 +13,16 @@ public class PlayerController : MonoBehaviour {
     private Game game;
     private Animator animator;
     private Rigidbody2D rb;
+    private AIController aCat;
+    private BoxCollider2D theCollider;
 
     // Use this for initialization
     void Start() {
         game = FindObjectOfType<Game>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        aCat = FindObjectOfType<AIController>();
+        theCollider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -33,6 +37,14 @@ public class PlayerController : MonoBehaviour {
         if (game.state == Game.State.DEATH) {
             //TODO: play death sound, do death animation
             Invoke("ResetPlayer", 1.0f);
+        }
+        Debug.Log("cat: " + aCat.name + ": flee=" + aCat.flee);
+        if (aCat.flee > 0) {
+            transform.localScale = new Vector3(2, 2, 2);
+            theCollider.size = new Vector2(1.35f, 1.35f);
+        } else {
+            transform.localScale = new Vector3(1, 1, 1);
+            theCollider.size = new Vector2(2.7f, 2.7f);
         }
     }
 
