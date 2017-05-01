@@ -8,6 +8,7 @@ public class MusicPlayer : MonoBehaviour {
     public static MusicPlayer instance;
 
     private AudioSource source;
+    private Preferences preferences = Preferences.instance;
 
     private float currentOctave = 4;
     private float halfStep = 1.05946309436f;
@@ -23,6 +24,7 @@ public class MusicPlayer : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        preferences = Preferences.instance;
         source = GetComponent<AudioSource>();
     }
 
@@ -32,6 +34,7 @@ public class MusicPlayer : MonoBehaviour {
             if (pitches.Count > 0) {//if any notes remain to be played
                 float pitch = pitches.Dequeue();
                 float duration = durations.Dequeue();
+                source.volume = preferences.musicVolume;
                 source.pitch = pitch;
                 source.Play();
                 timeRemaining = duration;

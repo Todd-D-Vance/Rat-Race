@@ -38,7 +38,6 @@ public class Game : MonoBehaviour {
     }
 
     int CountDots() {
-        Dots dots = FindObjectOfType<Dots>();
         if (!dots) {
             return 0;
         }
