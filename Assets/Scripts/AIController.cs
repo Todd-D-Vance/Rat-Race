@@ -7,6 +7,7 @@ public class AIController : MonoBehaviour {
     public float speed = 10.0f;
     public Vector3 initialPosition;
     public Vector3 initialRotation;
+    public bool flee;
 
     private MazeBuilder maze;
     private PlayerController player;
@@ -53,11 +54,27 @@ public class AIController : MonoBehaviour {
     void GetInput(out int dx, out int dy) {
         dx = 0;
         dy = 0;
+
         int x = Mathf.RoundToInt(transform.position.x);
         int y = Mathf.RoundToInt(transform.position.y);
 
-        //build paths to the player
-        aStar.RebuildAI(Mathf.RoundToInt(player.transform.position.x), Mathf.RoundToInt(player.transform.position.y));
+        if (flee) {
+            //build paths away from player
+            int xx = 2;
+            int yy = 2;
+            if(player.transform.position.x < 24) {
+                xx = 45;
+            }
+            if(player.transform.position.y < 32) {
+                yy = 61;
+            }
+
+            aStar.RebuildAI(xx, yy);
+
+        } else {
+            //build paths to player
+            aStar.RebuildAI(Mathf.RoundToInt(player.transform.position.x), Mathf.RoundToInt(player.transform.position.y));
+        }
 
 
         //if still in box, move in direction it is facing
@@ -82,10 +99,12 @@ public class AIController : MonoBehaviour {
 
         //find next location in direction of player
         GridPoint next;
+
         if (aStar.GetNext(current, out next)) {
             dx = next.x - current.x;
             dy = next.y - current.y;
         }
+
 
         if (!maze.IsPlayerSpace(x + dx, y + dy)) {
             dx = 0;
