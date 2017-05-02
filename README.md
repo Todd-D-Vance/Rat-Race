@@ -228,15 +228,24 @@ An introduction to refactoring, by making a better game state manager.
 Walking through every state of the game and making sure it complies
 with the GDD.
 
+* Fixing the States
+* Scores
+
 ## Chapter 27: The Demo State
 
 Write code to record a demo and play it back
 
+* Game Recording Framework
+
 ## Chapter 28: Game State V: Continuing Where We Left Off
 
-We interrupted Chapter 24 to fix the demo state, which was a
+We interrupted Chapter 26 to fix the demo state, which was a
 full-chapter rabbit hole.  We now resume our regular programming,
 including adding a scripted cutscene.
+
+* Attract Mode: Options
+* Game Mode
+* Cutscene 1: A Game of Cat and Mouse
 
 ## Chapter 29: Game State VI: Post Game Mode
 
@@ -244,22 +253,42 @@ The cutscene was another rabbit hole.  We resume with what happens
 when the game is over: save a high score, enter your name, back to
 title screen.
 
+* Post Game Mode: New High Score
+* Post Game Mode: High Scores
+
 ## Chapter 30: Improving the Game
 
 We play-test the game and write down everything we don't like.  Then we fix it.
+
+* Make Attract Mode Scenes Comparable to Title Screen
+* Navigation Through Attract Mode
+* Keyboard Control
+* Details in Description Screen
+* Set High Score Properly
+* Improve Cat Fleeing
+* Eaten Cat Animation
 
 ## Chapter 31: Additional Edibles and Hazards
 
 Another rabbit hole: add pickups like the cherries in Pac-Man.
 
+* Sprite for First Pickup
+* Blender Crash Course
+* Pickup Object
+
 ## Chapter 32: Fixing the Remaining Issues
 
 Back to the list of issues to fix.
+
+* Death Issues
+* Add More Cutscenes
 
 ## Chapter 33: Extensive Play Testing
 
 We are not done.  We still have to discover and fix issues.  We add a
 cheat code system to make this easier.
+
+* Cheat Codes
 
 ## Chapter 34: Building for Deployment
 
