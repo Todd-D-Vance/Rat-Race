@@ -5,10 +5,18 @@ using UnityEngine;
 public class Edible : MonoBehaviour {
 
     private SoundPlayer sound = SoundPlayer.instance;
+    private Score score;
 
     // Use this for initialization
     void Start() {
-
+        foreach (Score s in FindObjectsOfType<Score>()) {
+            if (s.gameObject.name == "Score") {
+                score = s;
+            }
+        }
+        if (!score) {
+            throw new UnityException("Score object not found");
+        }
     }
 
     // Update is called once per frame
@@ -23,6 +31,9 @@ public class Edible : MonoBehaviour {
                 foreach (AIController enemy in FindObjectsOfType<AIController>()) {
                     enemy.flee += 10;
                 }
+                score.Add(100);
+            } else {
+                score.Add(10);
             }
             sound.Gulp();
             GameObject.Destroy(gameObject, .1f);//give it 1/10 second to be swallowed

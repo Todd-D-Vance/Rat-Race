@@ -48,19 +48,8 @@ public class AStar : MonoBehaviour {
         }
     }
 
-    //add locations that are inaccessible (array)
+    //add locations that are inaccessible
     public void AddBlocked(params GridPoint[] gps) {
-        foreach (GridPoint gp in gps) {
-            grid[gp.x, gp.y] = -1;
-        }
-        //force rebuild
-        if (grid[destination.x, destination.y] == 0) {
-            grid[destination.x, destination.y] = int.MaxValue;
-        }
-    }
-
-    //add locations that are inaccessible (hash set)
-    public void AddBlocked(HashSet<GridPoint> gps) {
         foreach (GridPoint gp in gps) {
             grid[gp.x, gp.y] = -1;
         }
@@ -149,37 +138,7 @@ public class AStar : MonoBehaviour {
 
         return true;
     }
-
-    //get previous point, for moving away from destination
-    public bool GetPrev(GridPoint start, out GridPoint prev) {
-        prev = start;
-        if (grid[start.x, start.y] <= 0 || grid[start.x, start.y] == int.MaxValue) {
-            return false;
-        }
-
-        GridPoint x = new GridPoint() { x = start.x + 1, y = start.y };
-        if (x.x < grid.GetLength(0) && grid[x.x, x.y] >= 0 && grid[x.x, x.y] >= grid[prev.x, prev.y]) {
-            prev = x;
-        }
-
-        x = new GridPoint() { x = start.x - 1, y = start.y };
-        if (x.x >= 0 && grid[x.x, x.y] >= 0 && grid[x.x, x.y] >= grid[prev.x, prev.y]) {
-            prev = x;
-        }
-
-        x = new GridPoint() { x = start.x, y = start.y + 1 };
-        if (x.y < grid.GetLength(1) && grid[x.x, x.y] >= 0 && grid[x.x, x.y] >= grid[prev.x, prev.y]) {
-            prev = x;
-        }
-
-        x = new GridPoint() { x = start.x, y = start.y - 1 };
-        if (x.y >= 0 && grid[x.x, x.y] >= 0 && grid[x.x, x.y] >= grid[prev.x, prev.y]) {
-            prev = x;
-        }
-
-        return true;
-    }
-
+    
 }
 
 [Serializable]

@@ -6,9 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class AttractMode : MonoBehaviour {
 
-    public float timeRemaining = 10.0f;
-    public string nextScene = "Description";
-
     private GameStateManager gsm = GameStateManager.instance;
 
     public void PlayGame() {

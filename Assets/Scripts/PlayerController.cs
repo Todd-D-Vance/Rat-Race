@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour {
     private SoundPlayer sound = SoundPlayer.instance;
     private GameStateManager gsm = GameStateManager.instance;
 
+    private int catValue = 200;
+
     // Use this for initialization
     void Start() {
         animator = GetComponent<Animator>();
@@ -42,6 +44,7 @@ public class PlayerController : MonoBehaviour {
             transform.localScale = new Vector3(2, 2, 2);
             theCollider.size = new Vector2(1.35f, 1.35f);
         } else {
+            catValue = 200;
             transform.localScale = new Vector3(1, 1, 1);
             theCollider.size = new Vector2(2.7f, 2.7f);
         }
@@ -141,5 +144,13 @@ public class PlayerController : MonoBehaviour {
         FindObjectsOfType<AIController>()) {
             enemy.ResetEnemy();
         }
+    }
+
+    public void DoubleCatValue() {
+        catValue *= 2;
+    }
+
+    public int GetCatValue() {
+        return catValue;
     }
 }
