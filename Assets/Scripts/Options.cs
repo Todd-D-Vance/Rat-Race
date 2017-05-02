@@ -10,6 +10,7 @@ public class Options : MonoBehaviour {
     public Slider musicVolumeControl;
 
     private Preferences preferences = Preferences.instance;
+    private GameStateManager gsm = GameStateManager.instance;
 
     // Use this for initialization
     void Start () {
@@ -17,13 +18,9 @@ public class Options : MonoBehaviour {
         sfxVolumeControl.value = preferences.sfxVolume;
     }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     public void Return() {
         SceneManager.UnloadSceneAsync("Options");
+        gsm.LoadPreviousState();
     }
 
     public void ChangeSFXVolume() {

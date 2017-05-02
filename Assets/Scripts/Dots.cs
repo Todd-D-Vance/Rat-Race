@@ -104,9 +104,14 @@ public class Dots : MonoBehaviour {
 
         if (numDots > 0) {
             readyToGo = true;
-            Game game = FindObjectOfType<Game>();
-            game.state = Game.State.PLAY;
         }
     }
 
+    public int CountDots() {       
+        int count = 0;
+        foreach (Transform dot in transform) {
+            count++;
+        }
+        return count;
+    }
 }

@@ -10,17 +10,15 @@ public class PlayerController : MonoBehaviour {
 
 
     private MazeBuilder maze = null;
-    private Game game;
     private Animator animator;
     private Rigidbody2D rb;
     private AIController aCat;
     private BoxCollider2D theCollider;
     private SoundPlayer sound = SoundPlayer.instance;
-
+    private GameStateManager gsm = GameStateManager.instance;
 
     // Use this for initialization
     void Start() {
-        game = FindObjectOfType<Game>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         aCat = FindObjectOfType<AIController>();
@@ -36,7 +34,7 @@ public class PlayerController : MonoBehaviour {
         } else {
             maze = FindObjectOfType<MazeBuilder>();
         }
-        if (game.state == Game.State.DEATH) {
+        if (gsm.state == GameStateManager.State.GAME_MODE_DEATH) {
             //TODO: play death sound, do death animation
             Invoke("ResetPlayer", 1.0f);
         }
@@ -73,7 +71,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Move(int dx, int dy) {
-        if (!game || game.state != Game.State.PLAY) {
+        if (gsm.state != GameStateManager.State.GAME_MODE_PLAY) {
             if (animator) {
                 animator.SetBool("IsRunning", false);
                 rb.velocity = Vector2.zero;
@@ -136,17 +134,12 @@ public class PlayerController : MonoBehaviour {
     }
 
     void ResetPlayer() {
-        game.state = Game.State.RESET_PLAYER;
+        gsm.state = GameStateManager.State.GAME_MODE_RESET_PLAYER;
         transform.position = InitialPosition;
         transform.eulerAngles = InitialRotation;
         foreach (AIController enemy in
         FindObjectsOfType<AIController>()) {
             enemy.ResetEnemy();
         }
-        Invoke("Play", 1.0f);
-    }
-
-    void Play() {
-        game.state = Game.State.PLAY;
     }
 }

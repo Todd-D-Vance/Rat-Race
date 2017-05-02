@@ -12,11 +12,11 @@ public class AIController : MonoBehaviour {
     private MazeBuilder maze;
     private PlayerController player;
     private AStar aStar;
-    private Game game;
     private Animator animator;
     private Rigidbody2D rb;
     private BoxCollider2D theCollider;
     private SoundPlayer sound = SoundPlayer.instance;
+    private GameStateManager gsm = GameStateManager.instance;
 
     private int initDx = 0;
     private int initDy = 0;
@@ -25,7 +25,6 @@ public class AIController : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        game = FindObjectOfType<Game>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         theCollider = GetComponent<BoxCollider2D>();
@@ -87,7 +86,7 @@ public class AIController : MonoBehaviour {
 
 
         //if still in box, move in direction it is facing
-        if (!deployed) {
+        if (!deployed && gsm.state==GameStateManager.State.GAME_MODE_PLAY) {
             float tx = transform.position.x;
             float ty = transform.position.y;
             float tz = transform.position.z;
@@ -120,9 +119,9 @@ public class AIController : MonoBehaviour {
             dy = 0;
         }
     }
-
+    
     void Move(int dx, int dy) {
-        if (!game || game.state != Game.State.PLAY) {
+        if (gsm.state != GameStateManager.State.GAME_MODE_PLAY) {
             if (animator) {
                 animator.SetBool("IsRunning", false);
                 rb.velocity = Vector2.zero;
@@ -180,7 +179,7 @@ public class AIController : MonoBehaviour {
                 sound.BigGulp();
                 ResetEnemy();
             } else {
-                game.state = Game.State.DEATH;
+                gsm.state = GameStateManager.State.GAME_MODE_DEATH;
             }
         }
     }
