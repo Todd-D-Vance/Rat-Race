@@ -12,152 +12,268 @@
 
 Overview of the book
 
+### Elements of a Classic Arcade Game
+### Spiral Approach to Learning and Game Creation
+### Duties of the Reader/Student
+### What This Book Covers
+### Software Needed
+
 ## Chapter 2: Introduction to Unity
 
 Install Unity and mock-up a nonfunctional prototype
 
+### Install Unity
+### Install Visual Studio if Needed
+### Install GIMP
+### Game Objects and Prototype Assets
+### Initial Unity Scene
 
 ## Chapter 3: C# Programming I
 
 "Hello World" in Unity
 
+### Unity C#
+### Analysis of our C# Program
+### Compiling and Linking
+### A First Refactor
+
 ## Chapter 4: Non-Game Prototype
 
 Adding motion and collision to the prototype
+
+### Adding Motion to the Game
+### Design Decisions for our Grid
+### Our Prototype So Far
 
 ## Chapter 5: Source Control
 
 Protect yourself from future problems
 
+### Git
+
 ## Chapter 6: C# Programming II
 
 A crash-course in programming C#
+
+### Types
+### Collections
+### Scope and Visibility
+### Control
+### Random Number Generation
+### Annotations
+### Unity Constructs
 
 ## Chapter 7: Procedural Content Generation I: Automatic Maze Generation
 
 Design and automatically create a basic playable maze
 
-## Chapter 8: Artificial Intelligence: The A* Algorithm
+
+### Playable Maze Design
+### Starting the MazeBuilder Class
+### Testing the Result by Drawing It
+
+## Chapter 8: Artificial Intelligence: The A\* Algorithm
 
 How to make enemies move toward a goal
+
+### A\* On The Grid
+### The Algorithm
+### Designing an Implementation of the A\* Search
+### Implementing A\* in Unity C#
 
 ## Chapter 9: Game Mechanics Prototype
 
 Pickups (edibles) and an enemy that chases you
 
+### Controlling the Enemy
+### Dots to Eat
+### Clean Up the Assets
+
 ## Chapter 10: Designing a Game
 
 Writing your Game Design Document
+
+### Game Design Document I
+### Rapid Prototyping
+### Game Architecture
+### Game Engine Architecture
+### Level of Detail in a Design
 
 ## Chapter 11: Creating Game Art I: The Mouse
 
 Create a mouse sprite that can be animated out of ellipses
 
+### Creating the Mouse
+
 ## Chapter 12: Unity Animation Framework I
 
 The mouse wags its tail and twitches its whiskers
 
-## Chapter 13: Creating Game Art II: The Cat, the Cheese, and the Walls
+### Animating the Mouse Bones
 
-Creating more sprites and making them look good, and making the maze look much better
+## Chapter 13: Creating Game Art II: The Cat and the Cheese
 
-## Chapter 14: Unity Animation Framework II: Improving the Animation
+Creating more sprites and making them look good
+
+### Creating the Cat
+### Cheese for Dots
+
+## Chapter 14 Improving the Maze Walls I: Wall Segments
+
+Making maze walls look like Cartoon Jersey Barriers
+
+### Encoding a Wall Segment
+### Creating Wall Segments in GIMP
+### Build a Wall
+### Corner Walls
+### Remaining Wall Segments
+
+## Chapter 15: Improving the Maze Walls II: Building the Maze
+
+Put the wall segments together to make a maze that looks good
+
+### Modifying the MazeBuilder Script
+### Fixing the Wall Sprites
+
+## Chapter 16: Unity Animation Framework II: Improving the Animation
 
 The cat and mouse now run more realistically
 
-## Chapter 15: Procedural Content Generation II: Improving the Walls
+### Improving the Mouse Animation
+### Improving the Cat Animation
+
+## Chapter 17: Procedural Content Generation II: Improving the Walls
 
 Make the maze look less like midtown Manhattan and more like lower Manhattan
 
-## Chapter 16: Game States I: Win and Lose
+### Merging Islands
+### Eliminating Dead Ends
+### Refactoring MazeBuilder and Fixing Concave Corners
+
+## Chapter 18: Game States I: Win and Lose
 
 Adding a finite-state machine to the game to handle game states, and
 introduction to Unity's User Interface framework
 
-## Chapter 17: Game States II:  Attract Mode
+### States
+### Discrete Finite Automata
+### Scenes in Unity
+### Creating the Game Over Scene
+### UI Canvas in Unity
+### Scene Changes
+### Game Design Document II: Game States
+### Improving Game State Management
+
+## Chapter 19: Game States II:  Attract Mode
 
 Setting up title screen, high score screen, and so on before the game is played
 
-## Chapter 18: Game States III: Improving Game Behavior
+## Chapter 20: Game States III: Improving Game Behavior
 
 New level when all cheese is eaten
 
-## Chapter 19: Cat Box, More Cats, and Teleportation Tunnels
+### Leveling Up
+
+## Chapter 21: Cat Box, More Cats, and Teleportation Tunnels
 
 Adding the central portion of the maze: a box full of cats and tunnels
 that teleport you
 
-## Chapter  20: AI II: Cat Personalities and Flee from Player
+### Refactor MazeBuilder
+### Cat Box and Tunnels
+### Help Cats Escape from Box
+### Teleporters on Tunnels
+
+## Chapter  22: AI II: Cat Unherding and Flee from Player
 
 Add a finite-state machine to the AI so cats have different
 personalities and different modes.  Cats can now be eaten if the mouse
 eats the growth cheese.
 
-## Chapter 21: Unity Sound Framework
+### Make Cats Avoid Each Other
+### Flee Player Mode
+### Growth Hormone Cheese
+### Make Cats Edible
+
+## Chapter 23: Unity Sound Framework
 
 Make a music-player script and compose game music for it.  Also,
-create sound effects in Audacity.  Also some random bug fixes.
+create sound effects in Audacity.  
 
-## Chapter 22: Options Menus and Saving Values
+### Installing Audacity
+### Make a Game Tone
+### Beginning a Music Player Script
+### Music Theory in a Minute (or 30)
+### Music Parser
+### Playing Tunes in the Game
+### Other Game Sounds
+
+## Chapter 24: Options Menus and Saving Values
 
 Unity's persistence framework and saving game preferences
 
-## Chapter 23: Review and Refactor
+### Options Scene
+### Preferences Game Object
 
-An introduction to refactoring, including a better music player and a
-better game state manager.  More random bug fixes.
+## Chapter 25: Review and Refactor
 
-## Chapter 24: Game State IV: Making Every State Work
+An introduction to refactoring, by making a better game state manager. 
+
+### State of the Game
+### Refactoring Plan
+### Eliminating the Game Class
+
+## Chapter 26: Game State IV: Making Every State Work
 
 Walking through every state of the game and making sure it complies
 with the GDD.
 
-## Chapter 25: The Demo State
+## Chapter 27: The Demo State
 
 Write code to record a demo and play it back
 
-## Chapter 26: Game State V: Continuing Where We Left Off
+## Chapter 28: Game State V: Continuing Where We Left Off
 
 We interrupted Chapter 24 to fix the demo state, which was a
 full-chapter rabbit hole.  We now resume our regular programming,
 including adding a scripted cutscene.
 
-## Chapter 27: Game State VI: Post Game Mode
+## Chapter 29: Game State VI: Post Game Mode
 
 The cutscene was another rabbit hole.  We resume with what happens
 when the game is over: save a high score, enter your name, back to
 title screen.
 
-## Chapter 28: Improving the Game
+## Chapter 30: Improving the Game
 
 We play-test the game and write down everything we don't like.  Then we fix it.
 
-## Chapter 29: Additional Edibles and Hazards
+## Chapter 31: Additional Edibles and Hazards
 
 Another rabbit hole: add pickups like the cherries in Pac-Man.
 
-## Chapter 30: Fixing the Remaining Issues
+## Chapter 32: Fixing the Remaining Issues
 
 Back to the list of issues to fix.
 
-## Chapter 31: Extensive Play Testing
+## Chapter 33: Extensive Play Testing
 
 We are not done.  We still have to discover and fix issues.  We add a
 cheat code system to make this easier.
 
-## Chapter 32: Building for Deployment
+## Chapter 34: Building for Deployment
 
 Get the game running outside the Unity editor, on real machines
 
-## Chapter 33: Touch Screen Controls
+## Chapter 35: Touch Screen Controls
 
 Mobile devices typically do not have keyboards.
 
-## Chapter 34: More Features
+## Chapter 36: More Features
 
 Anything else to do before we publish?
 
-## Chapter 35: Publishing
+## Chapter 37: Publishing
 
 Time to make money, or at least get the game out there where people can play it.
 
