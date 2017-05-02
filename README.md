@@ -12,157 +12,157 @@
 
 Overview of the book
 
-#### Elements of a Classic Arcade Game
-#### Spiral Approach to Learning and Game Creation
-#### Duties of the Reader/Student
-#### What This Book Covers
-#### Software Needed
+* Elements of a Classic Arcade Game
+* Spiral Approach to Learning and Game Creation
+* Duties of the Reader/Student
+* What This Book Covers
+* Software Needed
 
 ## Chapter 2: Introduction to Unity
 
 Install Unity and mock-up a nonfunctional prototype
 
-#### Install Unity
-#### Install Visual Studio if Needed
-#### Install GIMP
-#### Game Objects and Prototype Assets
-#### Initial Unity Scene
+* Install Unity
+* Install Visual Studio if Needed
+* Install GIMP
+* Game Objects and Prototype Assets
+* Initial Unity Scene
 
 ## Chapter 3: C# Programming I
 
 "Hello World" in Unity
 
-#### Unity C#
-#### Analysis of our C# Program
-#### Compiling and Linking
-#### A First Refactor
+* Unity C#
+* Analysis of our C# Program
+* Compiling and Linking
+* A First Refactor
 
 ## Chapter 4: Non-Game Prototype
 
 Adding motion and collision to the prototype
 
-#### Adding Motion to the Game
-#### Design Decisions for our Grid
-#### Our Prototype So Far
+* Adding Motion to the Game
+* Design Decisions for our Grid
+* Our Prototype So Far
 
 ## Chapter 5: Source Control
 
 Protect yourself from future problems
 
-#### Git
+* Git
 
 ## Chapter 6: C# Programming II
 
 A crash-course in programming C#
 
-#### Types
-#### Collections
-#### Scope and Visibility
-#### Control
-#### Random Number Generation
-#### Annotations
-#### Unity Constructs
+* Types
+* Collections
+* Scope and Visibility
+* Control
+* Random Number Generation
+* Annotations
+* Unity Constructs
 
 ## Chapter 7: Procedural Content Generation I: Automatic Maze Generation
 
 Design and automatically create a basic playable maze
 
 
-#### Playable Maze Design
-#### Starting the MazeBuilder Class
-#### Testing the Result by Drawing It
+* Playable Maze Design
+* Starting the MazeBuilder Class
+* Testing the Result by Drawing It
 
 ## Chapter 8: Artificial Intelligence: The A\* Algorithm
 
 How to make enemies move toward a goal
 
-#### A\* On The Grid
-#### The Algorithm
-#### Designing an Implementation of the A\* Search
-#### Implementing A\* in Unity C#
+* A\* On The Grid
+* The Algorithm
+* Designing an Implementation of the A\* Search
+* Implementing A\* in Unity C#
 
 ## Chapter 9: Game Mechanics Prototype
 
 Pickups (edibles) and an enemy that chases you
 
-#### Controlling the Enemy
-#### Dots to Eat
-#### Clean Up the Assets
+* Controlling the Enemy
+* Dots to Eat
+* Clean Up the Assets
 
 ## Chapter 10: Designing a Game
 
 Writing your Game Design Document
 
-#### Game Design Document I
-#### Rapid Prototyping
-#### Game Architecture
-#### Game Engine Architecture
-#### Level of Detail in a Design
+* Game Design Document I
+* Rapid Prototyping
+* Game Architecture
+* Game Engine Architecture
+* Level of Detail in a Design
 
 ## Chapter 11: Creating Game Art I: The Mouse
 
 Create a mouse sprite that can be animated out of ellipses
 
-#### Creating the Mouse
+* Creating the Mouse
 
 ## Chapter 12: Unity Animation Framework I
 
 The mouse wags its tail and twitches its whiskers
 
-#### Animating the Mouse Bones
+* Animating the Mouse Bones
 
 ## Chapter 13: Creating Game Art II: The Cat and the Cheese
 
 Creating more sprites and making them look good
 
-#### Creating the Cat
-#### Cheese for Dots
+* Creating the Cat
+* Cheese for Dots
 
 ## Chapter 14 Improving the Maze Walls I: Wall Segments
 
 Making maze walls look like Cartoon Jersey Barriers
 
-#### Encoding a Wall Segment
-#### Creating Wall Segments in GIMP
-#### Build a Wall
-#### Corner Walls
-#### Remaining Wall Segments
+* Encoding a Wall Segment
+* Creating Wall Segments in GIMP
+* Build a Wall
+* Corner Walls
+* Remaining Wall Segments
 
 ## Chapter 15: Improving the Maze Walls II: Building the Maze
 
 Put the wall segments together to make a maze that looks good
 
-#### Modifying the MazeBuilder Script
-#### Fixing the Wall Sprites
+* Modifying the MazeBuilder Script
+* Fixing the Wall Sprites
 
 ## Chapter 16: Unity Animation Framework II: Improving the Animation
 
 The cat and mouse now run more realistically
 
-#### Improving the Mouse Animation
-#### Improving the Cat Animation
+* Improving the Mouse Animation
+* Improving the Cat Animation
 
 ## Chapter 17: Procedural Content Generation II: Improving the Walls
 
 Make the maze look less like midtown Manhattan and more like lower Manhattan
 
-#### Merging Islands
-#### Eliminating Dead Ends
-#### Refactoring MazeBuilder and Fixing Concave Corners
+* Merging Islands
+* Eliminating Dead Ends
+* Refactoring MazeBuilder and Fixing Concave Corners
 
 ## Chapter 18: Game States I: Win and Lose
 
 Adding a finite-state machine to the game to handle game states, and
 introduction to Unity's User Interface framework
 
-#### States
-#### Discrete Finite Automata
-#### Scenes in Unity
-#### Creating the Game Over Scene
-#### UI Canvas in Unity
-#### Scene Changes
-#### Game Design Document II: Game States
-#### Improving Game State Management
+* States
+* Discrete Finite Automata
+* Scenes in Unity
+* Creating the Game Over Scene
+* UI Canvas in Unity
+* Scene Changes
+* Game Design Document II: Game States
+* Improving Game State Management
 
 ## Chapter 19: Game States II:  Attract Mode
 
@@ -172,17 +172,17 @@ Setting up title screen, high score screen, and so on before the game is played
 
 New level when all cheese is eaten
 
-#### Leveling Up
+* Leveling Up
 
 ## Chapter 21: Cat Box, More Cats, and Teleportation Tunnels
 
 Adding the central portion of the maze: a box full of cats and tunnels
 that teleport you
 
-#### Refactor MazeBuilder
-#### Cat Box and Tunnels
-#### Help Cats Escape from Box
-#### Teleporters on Tunnels
+* Refactor MazeBuilder
+* Cat Box and Tunnels
+* Help Cats Escape from Box
+* Teleporters on Tunnels
 
 ## Chapter  22: AI II: Cat Unherding and Flee from Player
 
@@ -190,38 +190,38 @@ Add a finite-state machine to the AI so cats have different
 personalities and different modes.  Cats can now be eaten if the mouse
 eats the growth cheese.
 
-#### Make Cats Avoid Each Other
-#### Flee Player Mode
-#### Growth Hormone Cheese
-#### Make Cats Edible
+* Make Cats Avoid Each Other
+* Flee Player Mode
+* Growth Hormone Cheese
+* Make Cats Edible
 
 ## Chapter 23: Unity Sound Framework
 
 Make a music-player script and compose game music for it.  Also,
 create sound effects in Audacity.  
 
-#### Installing Audacity
-#### Make a Game Tone
-#### Beginning a Music Player Script
-#### Music Theory in a Minute (or 30)
-#### Music Parser
-#### Playing Tunes in the Game
-#### Other Game Sounds
+* Installing Audacity
+* Make a Game Tone
+* Beginning a Music Player Script
+* Music Theory in a Minute (or 30)
+* Music Parser
+* Playing Tunes in the Game
+* Other Game Sounds
 
 ## Chapter 24: Options Menus and Saving Values
 
 Unity's persistence framework and saving game preferences
 
-#### Options Scene
-#### Preferences Game Object
+* Options Scene
+* Preferences Game Object
 
 ## Chapter 25: Review and Refactor
 
 An introduction to refactoring, by making a better game state manager. 
 
-#### State of the Game
-#### Refactoring Plan
-#### Eliminating the Game Class
+* State of the Game
+* Refactoring Plan
+* Eliminating the Game Class
 
 ## Chapter 26: Game State IV: Making Every State Work
 
@@ -368,144 +368,144 @@ Assets include an animated mouse, animated cats, cheese (dots), walls pieces, ma
 The game will have the following states:
 
 
- ### State: {Init} This is the state of the game at startup.  Things that should only be done once, such as instantiating Singleton classes, happen here.  A splash screen will be shown for a short time.  
+ ### State: *Init* This is the state of the game at startup.  Things that should only be done once, such as instantiating Singleton classes, happen here.  A splash screen will be shown for a short time.  
 
 After all startup tasks are complete and when a certain short time period has passed, it transitions to the first state of the Attract Mode, the Title state.
 
 
- ### State: {Attract Mode: Title} A screen is shown with the title of the game and some graphics intended to make one excited about playing the game.  
+ ### State: *Attract Mode: Title* A screen is shown with the title of the game and some graphics intended to make one excited about playing the game.  
 
-After a certain amount of time has passed, the state transitions to the State: {Attract Mode: Description} state.
+After a certain amount of time has passed, the state transitions to the State: *Attract Mode: Description* state.
 
-If the Button: {Play} button is pressed, the state transitions to the State: {Game Mode: Intro} state.
+If the Button: *Play* button is pressed, the state transitions to the State: *Game Mode: Intro* state.
 
-If the Button: {Options} button is pressed, the state transitions to the State: {Attract Mode: Options} state.
+If the Button: *Options* button is pressed, the state transitions to the State: *Attract Mode: Options* state.
 
 
- ### State: {Attract Mode: Description} A screen is shown with a description of the game and some graphics with point values and a brief how-to for the game.
+ ### State: *Attract Mode: Description* A screen is shown with a description of the game and some graphics with point values and a brief how-to for the game.
 
-After a certain amount of time has passed, the state transitions to the State: {Attract Mode: High Scores} state.
+After a certain amount of time has passed, the state transitions to the State: *Attract Mode: High Scores* state.
 
-If the Button: {Play} button is pressed, the state transitions to the State: {Game Mode: Intro} state.
+If the Button: *Play* button is pressed, the state transitions to the State: *Game Mode: Intro* state.
 
-If the Button: {Options} button is pressed, the state transitions to the State: {Attract Mode: Options} state.
+If the Button: *Options* button is pressed, the state transitions to the State: *Attract Mode: Options* state.
 
 
- ### State: {Attract Mode: High Scores} A screen is shown with a list of the top ten saved scores.
+ ### State: *Attract Mode: High Scores* A screen is shown with a list of the top ten saved scores.
 
-After a certain amount of time has passed, the state transitions to the State: {Attract Mode: Demo} state.
+After a certain amount of time has passed, the state transitions to the State: *Attract Mode: Demo* state.
 
-If the Button: {Play} button is pressed, the state transitions to the State: {Game Mode: Intro} state.
+If the Button: *Play* button is pressed, the state transitions to the State: *Game Mode: Intro* state.
 
-If the Button: {Options} button is pressed, the state transitions to the State: {Attract Mode: Options} state.
+If the Button: *Options* button is pressed, the state transitions to the State: *Attract Mode: Options* state.
 
 
- ### State: {Attract Mode: Demo} A screen shows video playback of a sample game.
+ ### State: *Attract Mode: Demo* A screen shows video playback of a sample game.
 
-After a certain amount of time has passed, the state transitions to the State: {Attract Mode: Title} state.
+After a certain amount of time has passed, the state transitions to the State: *Attract Mode: Title* state.
 
-If the Button: {Play} button is pressed, the state transitions to the State: {Game Mode: Intro} state.
+If the Button: *Play* button is pressed, the state transitions to the State: *Game Mode: Intro* state.
 
-If the Button: {Options} button is pressed, the state transitions to the State: {Attract Mode: Options} state.
+If the Button: *Options* button is pressed, the state transitions to the State: *Attract Mode: Options* state.
 
 
- ### State: {Attract Mode: Options}  An options screen is shown, allowing the setting of options, that are automatically saved.
+ ### State: *Attract Mode: Options*  An options screen is shown, allowing the setting of options, that are automatically saved.
 
-If the Button: {Return} button is pressed, the state transitions to the State: {Attract Mode: Title} state.
+If the Button: *Return* button is pressed, the state transitions to the State: *Attract Mode: Title* state.
 
 
-If the Button: {Quit} button is pressed, the game exits if on a platform where this is possible.  Otherwise, it transitions to the State: {Attract Mode: Title} state.
+If the Button: *Quit* button is pressed, the game exits if on a platform where this is possible.  Otherwise, it transitions to the State: *Attract Mode: Title* state.
 
 
- ### State: {Game Mode: Intro} The level 1 board is displayed, the intro music is played, and the cats and mouse appear.  This state is analogous to the State: {Init} state in that it contains things only done once during a game being played, such as the introductory music.
+ ### State: *Game Mode: Intro* The level 1 board is displayed, the intro music is played, and the cats and mouse appear.  This state is analogous to the State: *Init* state in that it contains things only done once during a game being played, such as the introductory music.
 
-If the Button: {Options} button is pressed, the state transitions to the State: {Game Mode: Options} state.
+If the Button: *Options* button is pressed, the state transitions to the State: *Game Mode: Options* state.
 
-After the sequence finishes, this state transitions to the State: {Game Mode: Play} state.
+After the sequence finishes, this state transitions to the State: *Game Mode: Play* state.
 
 
- ### State: {Game Mode: Play} Input is connected to the player and AI to the cats.
+ ### State: *Game Mode: Play* Input is connected to the player and AI to the cats.
 
-If the Button: {Options} button is pressed, the state transitions to the State: {Game Mode: Options} state.
+If the Button: *Options* button is pressed, the state transitions to the State: *Game Mode: Options* state.
 
-If all dots are eaten, the state transitions to the  State: {Game Mode: End Level} state.
+If all dots are eaten, the state transitions to the  State: *Game Mode: End Level* state.
 
 
-If a cat catches the mouse, the state transitions to the  State: {Game Mode: Death} state.
+If a cat catches the mouse, the state transitions to the  State: *Game Mode: Death* state.
 
 
- ### State: {Game Mode: Start Level} The appropriate level board is displayed.
+ ### State: *Game Mode: Start Level* The appropriate level board is displayed.
 
-If the Button: {Options} button is pressed, the state transitions to the State: {Game Mode: Options} state.
+If the Button: *Options* button is pressed, the state transitions to the State: *Game Mode: Options* state.
 
-After a short time, the state transitions to the State: {Game Mode: Play} state.
+After a short time, the state transitions to the State: *Game Mode: Play* state.
 
 
- ### State: {Game Mode: Death}  A death animation and sound is played.
+ ### State: *Game Mode: Death*  A death animation and sound is played.
 
-If the Button: {Options} button is pressed, the state transitions to the State: {Game Mode: Options} state.
+If the Button: *Options* button is pressed, the state transitions to the State: *Game Mode: Options* state.
 
-When the animation finishes, a life is lost.  If there are no more lives, the state transitions to the State: {Game Mode: Game Over} state.  Otherwise, the state transitions to the State: {Game Mode: Reset Player} state.
+When the animation finishes, a life is lost.  If there are no more lives, the state transitions to the State: *Game Mode: Game Over* state.  Otherwise, the state transitions to the State: *Game Mode: Reset Player* state.
 
- ### State: {Game Mode: Game Over} A game over message is shown and the player is removed from play.  The enemies may continue to gloat.
+ ### State: *Game Mode: Game Over* A game over message is shown and the player is removed from play.  The enemies may continue to gloat.
 
-If the Button: {Options} button is pressed, the state transitions to the State: {Game Mode: Options} state.
+If the Button: *Options* button is pressed, the state transitions to the State: *Game Mode: Options* state.
 
-After a short time, if the score is higher than the lowest score on the top ten list, the state transitions to the  State: {Post Game Mode: New High Score} state.  Otherwise, it transitions to the State: {Attract Mode: Title} state.
+After a short time, if the score is higher than the lowest score on the top ten list, the state transitions to the  State: *Post Game Mode: New High Score* state.  Otherwise, it transitions to the State: *Attract Mode: Title* state.
 
 
- ### State: {Game Mode: Reset Player} The player and cats are reset in the existing level.
+ ### State: *Game Mode: Reset Player* The player and cats are reset in the existing level.
 
-If the Button: {Options} button is pressed, the state transitions to the State: {Game Mode: Options} state.
+If the Button: *Options* button is pressed, the state transitions to the State: *Game Mode: Options* state.
 
-After a short pause, the state transitions to the State: {Game Mode: Play} state.
+After a short pause, the state transitions to the State: *Game Mode: Play* state.
 
 
- ### State: {Game Mode: End Level} An end of level animation/sound is played.
+ ### State: *Game Mode: End Level* An end of level animation/sound is played.
 
-If the Button: {Options} button is pressed, the state transitions to the State: {Game Mode: Options} state.
+If the Button: *Options* button is pressed, the state transitions to the State: *Game Mode: Options* state.
 
-After the animation is done, the state transitions to the State: {Game Mode: Level Up} state.
+After the animation is done, the state transitions to the State: *Game Mode: Level Up* state.
 
 
- ### State: {Game Mode: Level Up} The level number is incremented.
+ ### State: *Game Mode: Level Up* The level number is incremented.
 
-If the Button: {Options} button is pressed, the state transitions to the State: {Game Mode: Options} state.
+If the Button: *Options* button is pressed, the state transitions to the State: *Game Mode: Options* state.
 
-For certain levels, the game transitions to the State: {Game Mode: Cutscene}  state.  For the remaining, it transitions to the State: {Game Mode: Start Level} state.
+For certain levels, the game transitions to the State: *Game Mode: Cutscene*  state.  For the remaining, it transitions to the State: *Game Mode: Start Level* state.
 
 
- ### State: {Game Mode: Cutscene} A video playback screen between certain levels that advances the story.
+ ### State: *Game Mode: Cutscene* A video playback screen between certain levels that advances the story.
 
-If the Button: {Options} button is pressed, the state transitions to the State: {Game Mode: Options} state.
+If the Button: *Options* button is pressed, the state transitions to the State: *Game Mode: Options* state.
 
-After the video is complete, this state transitions to the State: {Game Mode: Start Level} state.
+After the video is complete, this state transitions to the State: *Game Mode: Start Level* state.
 
 
- ### State: {Game Mode: Options} An options screen is shown, allowing the setting of options, that are automatically saved.
+ ### State: *Game Mode: Options* An options screen is shown, allowing the setting of options, that are automatically saved.
 
-If the Button: {Return} button is pressed, the state transitions to the State: {Game Mode} state it came from.
+If the Button: *Return* button is pressed, the state transitions to the State: *Game Mode* state it came from.
 
-If the Button: {Quit} button is pressed, the state transitions to the State: {Game Mode: Game Over} state.
+If the Button: *Quit* button is pressed, the state transitions to the State: *Game Mode: Game Over* state.
 
 
- ### State: {Post Game Mode: New High Score} An animation/sound shows a new high score has been achieved.
+ ### State: *Post Game Mode: New High Score* An animation/sound shows a new high score has been achieved.
 
-If the Button: {Options} button is pressed, the state transitions to the State: {Post Game Mode: Options} state.
+If the Button: *Options* button is pressed, the state transitions to the State: *Post Game Mode: Options* state.
 
-After a short time, this state transitions to the State: {Post Game Mode: High Scores} state.
+After a short time, this state transitions to the State: *Post Game Mode: High Scores* state.
 
 
- ### State: {Post Game Mode: High Scores} The list of high scores is shown, with the newly-added score highlighted.
+ ### State: *Post Game Mode: High Scores* The list of high scores is shown, with the newly-added score highlighted.
 
-If the Button: {Options} button is pressed, the state transitions to the State: {Game Mode: Options} state.
+If the Button: *Options* button is pressed, the state transitions to the State: *Game Mode: Options* state.
 
 
-After a short time, this state transitions to the State: {Attract Mode: Title} state.
+After a short time, this state transitions to the State: *Attract Mode: Title* state.
 
 
- ### State: {Post Game Mode: Options}  An options screen is shown, allowing the setting of options, that are automatically saved.
+ ### State: *Post Game Mode: Options*  An options screen is shown, allowing the setting of options, that are automatically saved.
 
-If the Button: {Return} button is pressed, the state transitions to the State: {Post Game Mode} state it came from.
+If the Button: *Return* button is pressed, the state transitions to the State: *Post Game Mode* state it came from.
 
-If the Button: {Quit} button is pressed, the state transitions to the State: {Attract Mode: Title} state.
+If the Button: *Quit* button is pressed, the state transitions to the State: *Attract Mode: Title* state.
