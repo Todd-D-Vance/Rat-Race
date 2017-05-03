@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AStar : MonoBehaviour {
-    public bool rebuildAutomatically = true;
-
     private GridPoint destination = new GridPoint() { x = 2, y = 2 };
 
     private int[,] grid;
