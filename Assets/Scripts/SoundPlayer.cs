@@ -48,6 +48,7 @@ public class SoundPlayer : MonoBehaviour {
 
     public void BigSqueak() {
         squeak.pitch = Random.Range(0.4f, .6f);
+        squeak.volume = 1 * preferences.sfxVolume;    
         squeak.Play();
     }
 
