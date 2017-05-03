@@ -25,7 +25,7 @@ public class GameStateManager : MonoBehaviour {
     private State stateLastFrame = State.INVALID;
     private State lastState = State.INVALID;
 
-    private int placeInHighScoreList = 0;
+    public int placeInHighScoreList = 0;
 
     private int numberOfLevelsPlayed = 0;
 
@@ -107,7 +107,7 @@ public class GameStateManager : MonoBehaviour {
                 break;
 
             case State.GAME_MODE_INTRO:
-                if(framesInState == 0) {
+                if (framesInState == 0) {
                     if (recordThisGame) {
                         recorder.StartRecording();
                     }
@@ -140,13 +140,13 @@ public class GameStateManager : MonoBehaviour {
                 //delay so level doesn't end before dots are created
                 if (timeInState > 0.1f) {
                     Dots dots = FindObjectOfType<Dots>();
-                    if (dots && dots.CountDots() <= 0) {   
+                    if (dots && dots.CountDots() <= 0) {
                         state = State.GAME_MODE_END_LEVEL;
                     }
                 }
                 break;
 
-            case State.GAME_MODE_START_LEVEL:               
+            case State.GAME_MODE_START_LEVEL:
                 //wait a bit to prevent glitch at beginning of level
                 if (framesInState == 10) {
                     if (music) {
@@ -246,12 +246,12 @@ public class GameStateManager : MonoBehaviour {
                     if (music) {
                         music.PlayTune("R8 O4 E- B-");
                     }
-                }             
-                if (framesInState ==30) {// about 1/2 second
+                }
+                if (framesInState == 30) {// about 1/2 second
                     if (numberOfLevelsPlayed == 2) {
-                        state = GameStateManager.State.GAME_MODE_CUTSCENE;
+                        state = State.GAME_MODE_CUTSCENE;
                     } else {
-                        state = GameStateManager.State.GAME_MODE_START_LEVEL;
+                        state = State.GAME_MODE_START_LEVEL;
                     }
                 }
                 break;
@@ -260,21 +260,42 @@ public class GameStateManager : MonoBehaviour {
                 if (framesInState == 0) {
                     if (numberOfLevelsPlayed == 2) {
                         SceneManager.LoadScene("Cutscene1");
-                    } 
+                    }
                 }
                 break;
+
             case State.GAME_MODE_OPTIONS:
                 if (framesInState == 0) {//if beginning of state
                     SceneManager.LoadSceneAsync("Options",
                     LoadSceneMode.Additive);
                 }
                 break;
+
             case State.POST_GAME_MODE_NEW_HIGH_SCORE:
+                if (framesInState == 0) {
+                    SceneManager.LoadScene("NewHighScore");
+                }
+                if (framesInState == 1800) {
+                    state = State.POST_GAME_MODE_HIGH_SCORES;
+                }
                 break;
+
             case State.POST_GAME_MODE_HIGH_SCORES:
+                if (framesInState == 0) {
+                    SceneManager.LoadScene(highScoreScene);
+                }
+                if (framesInState == 5) {
+                    FindObjectOfType<ListOfScores>().highlight = placeInHighScoreList;
+                }
+                if (framesInState == 600) {
+                    SceneManager.LoadScene(titleScene);
+                    state = State.ATTRACT_MODE_TITLE;
+                }
                 break;
+
             case State.POST_GAME_MODE_OPTIONS:
                 break;
+
             default:
                 throw new UnityException("Unknown Game State");
         }
