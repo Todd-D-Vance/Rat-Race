@@ -281,7 +281,7 @@ Another rabbit hole: add pickups like the cherries in Pac-Man.
 Back to the list of issues to fix.
 
 * Death Issues
-* Add More Cutscenes
+* Cutscene 2: When the Mouse is Away, the Cats will Play
 
 ## Chapter 33: Extensive Play Testing
 
