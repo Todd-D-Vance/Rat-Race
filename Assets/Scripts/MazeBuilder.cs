@@ -12,6 +12,8 @@ public class MazeBuilder : MonoBehaviour {
 
     private bool[,] grid;
 
+    private Recorder recorder = Recorder.instance;
+    private GameStateManager gsm = GameStateManager.instance;
 
     // Use this for initialization
     void Start() {
@@ -251,8 +253,11 @@ public class MazeBuilder : MonoBehaviour {
     public void Draw() {
         for (int x = 0; x < xSize; x++) {
             for (int y = 0; y < ySize; y++) {
-                Instantiate(exterior, new Vector3(x, y, 10),
-  Quaternion.identity, transform);
+                GameObject g = Instantiate(exterior, new Vector3(x, y, 10),
+                    Quaternion.identity, transform);
+                if (gsm.recordThisGame) {
+                    recorder.RecordIfRecording(recorder.CreateCommand(g));
+                }
                 if (grid[x, y]) {
 
                     //instantiate solid regions
@@ -273,24 +278,36 @@ public class MazeBuilder : MonoBehaviour {
                     }
 
                     if ((directions & 9) == 9 && !WallUpLeftConcave(x, y)) {//up left
-                        Instantiate(solidRegions[0], new Vector3(x, y, 9),
+                        g=Instantiate(solidRegions[0], new Vector3(x, y, 9),
                       Quaternion.identity, transform);
+                        if (gsm.recordThisGame) {
+                            recorder.RecordIfRecording(recorder.CreateCommand(g));
+                        }
                         directions += 16;
                     }
 
                     if ((directions & 3) == 3 && !WallUpRightConcave(x, y)) {//up right
-                        Instantiate(solidRegions[1], new Vector3(x, y, 9),
+                        g=Instantiate(solidRegions[1], new Vector3(x, y, 9),
                         Quaternion.identity, transform);
+                        if (gsm.recordThisGame) {
+                            recorder.RecordIfRecording(recorder.CreateCommand(g));
+                        }
                         directions += 32;
                     }
                     if ((directions & 6) == 6 && !WallDownRightConcave(x, y)) {//down right
-                        Instantiate(solidRegions[2], new Vector3(x, y, 9),
+                        g=Instantiate(solidRegions[2], new Vector3(x, y, 9),
                         Quaternion.identity, transform);
+                        if (gsm.recordThisGame) {
+                            recorder.RecordIfRecording(recorder.CreateCommand(g));
+                        }
                         directions += 64;
                     }
                     if ((directions & 12) == 12 && !WallDownLeftConcave(x, y)) {//down left
-                        Instantiate(solidRegions[3], new Vector3(x, y, 9),
+                        g=Instantiate(solidRegions[3], new Vector3(x, y, 9),
                         Quaternion.identity, transform);
+                        if (gsm.recordThisGame) {
+                            recorder.RecordIfRecording(recorder.CreateCommand(g));
+                        }
                         directions += 128;
                     }
 
@@ -331,8 +348,11 @@ public class MazeBuilder : MonoBehaviour {
 
 
                     if (count != 4) {//count==4 means solid region, no wall
-                        Instantiate(wallTiles[wallTile], new Vector3(x, y, 0),
+                        g=Instantiate(wallTiles[wallTile], new Vector3(x, y, 0),
                         Quaternion.identity, transform);
+                        if (gsm.recordThisGame) {
+                            recorder.RecordIfRecording(recorder.CreateCommand(g));
+                        }
                     }
                 }
 

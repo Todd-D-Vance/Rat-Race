@@ -17,6 +17,7 @@ public class AIController : MonoBehaviour {
     private BoxCollider2D theCollider;
     private SoundPlayer sound = SoundPlayer.instance;
     private GameStateManager gsm = GameStateManager.instance;
+    private Recorder recorder = Recorder.instance;
     private Score score;
 
     private int initDx = 0;
@@ -39,6 +40,9 @@ public class AIController : MonoBehaviour {
             throw new UnityException("Score object not found");
         }
         ResetEnemy();
+        if (gsm.recordThisGame) {
+            recorder.RecordIfRecording(recorder.CreateCommand(gameObject));
+        }
     }
 
     // Update is called once per frame
@@ -66,6 +70,13 @@ public class AIController : MonoBehaviour {
 
         if (deployed && Mathf.RoundToInt((transform.position - player.transform.position).magnitude) == 10) {
             sound.Meow();
+        }
+    }
+
+    private void LateUpdate() {
+        //update recording
+        if (gsm.framesInState > 7 && gsm.recordThisGame && gsm.state == GameStateManager.State.GAME_MODE_PLAY) {
+            recorder.RecordIfRecording(recorder.MoveCommand(gameObject));
         }
     }
 
