@@ -25,6 +25,8 @@ public class AIController : MonoBehaviour {
     private float delay = 0;
     private bool deployed = false;
 
+    private int randomGoalX = 2;
+    private int randomGoalY = 2;
 
     // Use this for initialization
     void Start() {
@@ -49,7 +51,9 @@ public class AIController : MonoBehaviour {
     void Update() {
         if (maze) {
             if (delay > 0) {
-                delay -= Time.deltaTime;
+                if (gsm.state == GameStateManager.State.GAME_MODE_PLAY) {
+                    delay -= Time.deltaTime;
+                }
             } else {
                 int dx, dy;
                 GetInput(out dx, out dy);
@@ -63,13 +67,20 @@ public class AIController : MonoBehaviour {
             BuildPathsFromMaze();
         }
         if (flee > 0) {
-            flee -= Time.deltaTime;
+            if (gsm.state == GameStateManager.State.GAME_MODE_PLAY) {
+                flee -= Time.deltaTime;
+            }
         } else {
             flee = 0;
         }
 
-        if (deployed && Mathf.RoundToInt((transform.position - player.transform.position).magnitude) == 10) {
+        if (deployed && gsm.state == GameStateManager.State.GAME_MODE_PLAY  && Mathf.RoundToInt((transform.position - player.transform.position).magnitude) == 10) {
             sound.Meow();
+        }
+
+        if (gsm.state == GameStateManager.State.GAME_MODE_GAME_OVER) {
+            //deploy them all
+            delay = 0;
         }
     }
 
@@ -87,7 +98,20 @@ public class AIController : MonoBehaviour {
         int x = Mathf.RoundToInt(transform.position.x);
         int y = Mathf.RoundToInt(transform.position.y);
 
-        if (flee > 0) {
+        if (gsm.state == GameStateManager.State.GAME_MODE_GAME_OVER) {
+            //play randomly
+
+            if(Mathf.Abs(randomGoalX-transform.position.x) < 5) {
+                randomGoalX = 47 - randomGoalX;
+            }
+
+            if (Mathf.Abs(randomGoalY - transform.position.y) < 5) {
+                randomGoalY = 63 - randomGoalY;
+            }
+
+            aStar.RebuildAI(randomGoalX, randomGoalY);
+
+        } else if (flee > 0) {
             //build paths away from player
             int xx = 2;
             int yy = 2;
@@ -106,7 +130,7 @@ public class AIController : MonoBehaviour {
 
 
         //if still in box, move in direction it is facing
-        if (!deployed && gsm.state==GameStateManager.State.GAME_MODE_PLAY) {
+        if (!deployed && (gsm.state == GameStateManager.State.GAME_MODE_PLAY || gsm.state == GameStateManager.State.GAME_MODE_GAME_OVER)) {
             float tx = transform.position.x;
             float ty = transform.position.y;
             float tz = transform.position.z;
@@ -139,9 +163,10 @@ public class AIController : MonoBehaviour {
             dy = 0;
         }
     }
-    
+
     void Move(int dx, int dy) {
-        if (gsm.state != GameStateManager.State.GAME_MODE_PLAY) {
+        if (gsm.state != GameStateManager.State.GAME_MODE_PLAY
+            && gsm.state != GameStateManager.State.GAME_MODE_GAME_OVER) {
             if (animator) {
                 animator.SetBool("IsRunning", false);
                 rb.velocity = Vector2.zero;

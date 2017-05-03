@@ -39,11 +39,7 @@ public class PlayerController : MonoBehaviour {
             Move(dx, dy);
         } else {
             maze = FindObjectOfType<MazeBuilder>();
-        }
-        if (gsm.state == GameStateManager.State.GAME_MODE_DEATH) {
-            //TODO: play death sound, do death animation
-            Invoke("ResetPlayer", 1.0f);
-        }
+        }        
         if (aCat.flee > 0) {
             transform.localScale = new Vector3(2, 2, 2);
             theCollider.size = new Vector2(1.35f, 1.35f);
@@ -146,16 +142,7 @@ public class PlayerController : MonoBehaviour {
             transform.position = new Vector3(x, transform.position.y, transform.position.z);
         }
     }
-
-    void ResetPlayer() {
-        gsm.state = GameStateManager.State.GAME_MODE_RESET_PLAYER;
-        transform.position = InitialPosition;
-        transform.eulerAngles = InitialRotation;
-        foreach (AIController enemy in
-        FindObjectsOfType<AIController>()) {
-            enemy.ResetEnemy();
-        }
-    }
+   
 
     public void DoubleCatValue() {
         catValue *= 2;
