@@ -294,6 +294,10 @@ public class GameStateManager : MonoBehaviour {
                 break;
 
             case State.POST_GAME_MODE_OPTIONS:
+                if (framesInState == 0) {//if beginning of state
+                    SceneManager.LoadSceneAsync("Options",
+                    LoadSceneMode.Additive);
+                }
                 break;
 
             default:
