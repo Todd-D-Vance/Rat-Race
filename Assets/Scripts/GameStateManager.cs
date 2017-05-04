@@ -77,27 +77,47 @@ public class GameStateManager : MonoBehaviour {
                 }
                 break;
             case State.ATTRACT_MODE_TITLE:
-                if (timeInState >= 10.0f) {
+                if (timeInState >= 10.0f || Input.GetKey("space") || Input.GetKey("right")) {
                     SceneManager.LoadScene(descriptionScene);
                     state = State.ATTRACT_MODE_DESCRIPTION;
+                } else if (Input.GetKey("backspace") || Input.GetKey("left")) {
+                    SceneManager.LoadScene(demoScene);
+                    state = State.ATTRACT_MODE_DEMO;
+                } else if (Input.GetButtonDown("Cancel")) {
+                    state = State.ATTRACT_MODE_OPTIONS;
                 }
                 break;
             case State.ATTRACT_MODE_DESCRIPTION:
-                if (timeInState >= 10.0f) {
+                if (timeInState >= 10.0f || Input.GetKey("space") || Input.GetKey("right")) {
                     SceneManager.LoadScene(highScoreScene);
                     state = State.ATTRACT_MODE_HIGH_SCORES;
+                } else if (Input.GetKey("backspace") || Input.GetKey("left")) {
+                    SceneManager.LoadScene(titleScene);
+                    state = State.ATTRACT_MODE_TITLE;
+                } else if (Input.GetButtonDown("Cancel")) {
+                    state = State.ATTRACT_MODE_OPTIONS;
                 }
                 break;
             case State.ATTRACT_MODE_HIGH_SCORES:
-                if (timeInState >= 10.0f) {
+                if (timeInState >= 10.0f || Input.GetKey("space") || Input.GetKey("right")) {
                     SceneManager.LoadScene(demoScene);
                     state = State.ATTRACT_MODE_DEMO;
+                } else if (Input.GetKey("backspace") || Input.GetKey("left")) {
+                    SceneManager.LoadScene(descriptionScene);
+                    state = State.ATTRACT_MODE_DESCRIPTION;
+                } else if (Input.GetButtonDown("Cancel")) {
+                    state = State.ATTRACT_MODE_OPTIONS;
                 }
                 break;
             case State.ATTRACT_MODE_DEMO:
-                if (timeInState >= 30f) {
+                if (timeInState >= 30f || Input.GetKey("space") || Input.GetKey("right")) {
                     SceneManager.LoadScene(titleScene);
                     state = State.ATTRACT_MODE_TITLE;
+                } else if (Input.GetKey("backspace") || Input.GetKey("left")) {
+                    SceneManager.LoadScene(highScoreScene);
+                    state = State.ATTRACT_MODE_HIGH_SCORES;
+                } else if (Input.GetButtonDown("Cancel")) {
+                    state = State.ATTRACT_MODE_OPTIONS;
                 }
                 break;
             case State.ATTRACT_MODE_OPTIONS:
@@ -129,6 +149,9 @@ public class GameStateManager : MonoBehaviour {
                 if (timeInState > 3f) {//TODO make dots draw before PLAY mode
                     state = State.GAME_MODE_PLAY;
                 }
+                if (Input.GetButtonDown("Cancel")) {
+                    state = State.GAME_MODE_OPTIONS;
+                }
 
                 break;
 
@@ -144,6 +167,9 @@ public class GameStateManager : MonoBehaviour {
                         state = State.GAME_MODE_END_LEVEL;
                     }
                 }
+                if (Input.GetButtonDown("Cancel")) {
+                    state = State.GAME_MODE_OPTIONS;
+                }
                 break;
 
             case State.GAME_MODE_START_LEVEL:
@@ -158,6 +184,9 @@ public class GameStateManager : MonoBehaviour {
                 }
                 if (timeInState > 0.5f) {
                     state = State.GAME_MODE_RESET_PLAYER;
+                }
+                if (Input.GetButtonDown("Cancel")) {
+                    state = State.GAME_MODE_OPTIONS;
                 }
                 break;
 
@@ -195,6 +224,9 @@ public class GameStateManager : MonoBehaviour {
                         enemy.ResetEnemy();
                     }
                 }
+                if (Input.GetButtonDown("Cancel")) {
+                    state = State.GAME_MODE_OPTIONS;
+                }
                 break;
 
             case GameStateManager.State.GAME_MODE_GAME_OVER:
@@ -212,6 +244,9 @@ public class GameStateManager : MonoBehaviour {
                         SceneManager.LoadScene(titleScene);
                     }
                 }
+                if (Input.GetButtonDown("Cancel")) {
+                    state = State.GAME_MODE_OPTIONS;
+                }
                 break;
 
             case State.GAME_MODE_RESET_PLAYER:
@@ -226,6 +261,9 @@ public class GameStateManager : MonoBehaviour {
                 if (timeInState > 1f) {
                     state = State.GAME_MODE_PLAY;
                 }
+                if (Input.GetButtonDown("Cancel")) {
+                    state = State.GAME_MODE_OPTIONS;
+                }
                 break;
 
             case State.GAME_MODE_END_LEVEL:
@@ -238,6 +276,9 @@ public class GameStateManager : MonoBehaviour {
                 }
                 if (timeInState > 2f) {
                     state = State.GAME_MODE_LEVEL_UP;
+                }
+                if (Input.GetButtonDown("Cancel")) {
+                    state = State.GAME_MODE_OPTIONS;
                 }
                 break;
 
@@ -254,6 +295,9 @@ public class GameStateManager : MonoBehaviour {
                         state = State.GAME_MODE_START_LEVEL;
                     }
                 }
+                if (Input.GetButtonDown("Cancel")) {
+                    state = State.GAME_MODE_OPTIONS;
+                }
                 break;
 
             case State.GAME_MODE_CUTSCENE:
@@ -261,6 +305,9 @@ public class GameStateManager : MonoBehaviour {
                     if (numberOfLevelsPlayed == 2) {
                         SceneManager.LoadScene("Cutscene1");
                     }
+                }
+                if (Input.GetButtonDown("Cancel")) {
+                    state = State.GAME_MODE_OPTIONS;
                 }
                 break;
 
@@ -278,6 +325,9 @@ public class GameStateManager : MonoBehaviour {
                 if (framesInState == 1800) {
                     state = State.POST_GAME_MODE_HIGH_SCORES;
                 }
+                if (Input.GetButtonDown("Cancel")) {
+                    state = State.POST_GAME_MODE_OPTIONS;
+                }
                 break;
 
             case State.POST_GAME_MODE_HIGH_SCORES:
@@ -290,6 +340,9 @@ public class GameStateManager : MonoBehaviour {
                 if (framesInState == 600) {
                     SceneManager.LoadScene(titleScene);
                     state = State.ATTRACT_MODE_TITLE;
+                }
+                if (Input.GetButtonDown("Cancel")) {
+                    state = State.POST_GAME_MODE_OPTIONS;
                 }
                 break;
 
