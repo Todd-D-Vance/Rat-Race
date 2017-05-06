@@ -9,19 +9,17 @@ public class PlayerController : MonoBehaviour {
     private MazeBuilder maze;
     private Rigidbody2D rb;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
         maze = FindObjectOfType<MazeBuilder>();
         rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update() {
-        if (maze) {
-            int dx, dy;
-            GetInput(out dx, out dy);
-            Move(dx, dy);
-        }
+        int dx, dy;
+        GetInput(out dx, out dy);
+        Move(dx, dy);
     }
 
     void GetInput(out int dx, out int dy) {
@@ -48,7 +46,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void Move(int dx, int dy) {       
+    void Move(int dx, int dy) {
         if (dx != 0 || dy != 0) {
             rb.velocity = new Vector2(dx, dy) * speed;
         }
