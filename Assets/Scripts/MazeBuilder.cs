@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MazeBuilder : MonoBehaviour {
-
-    public GameObject wallPrefab;
+    public GameObject exterior;
+    public GameObject[] solidRegions;
+    public GameObject[] wallTiles;
 
     public int xSize = 48;
     public int ySize = 64;
@@ -89,9 +90,74 @@ public class MazeBuilder : MonoBehaviour {
     public void Draw() {
         for (int x = 0; x < xSize; x++) {
             for (int y = 0; y < ySize; y++) {
+                Instantiate(exterior, new Vector3(x, y, 10),
+    Quaternion.identity, transform);
                 if (grid[x, y]) {
-                    Instantiate(wallPrefab, new Vector3(x, y, wallPrefab.transform.position.z),
-                    Quaternion.identity, transform);
+
+                    //instantiate solid regions
+                    int directions = 0;
+
+                    if ((y >= ySize - 1) || grid[x, y + 1]) {//up
+                        directions += 1;
+                    }
+                    if ((y <= 0) || grid[x, y - 1]) {//down
+                        directions += 4;
+                    }
+                    if ((x <= 0) || grid[x - 1, y]) {//left
+                        directions += 8;
+                    }
+                    if ((x >= xSize - 1) || grid[x + 1, y]) {//right
+                        directions += 2;
+                    }
+                    if ((directions & 9) == 9) {//up left
+                        Instantiate(solidRegions[0], new Vector3(x, y, 9),
+                        Quaternion.identity, transform);
+                        directions += 16;
+                    }
+                    if ((directions & 3) == 3) {//up right
+                        Instantiate(solidRegions[1], new Vector3(x, y, 9),
+                        Quaternion.identity, transform);
+                        directions += 32;
+                    }
+                    if ((directions & 6) == 6) {//down right
+                        Instantiate(solidRegions[2], new Vector3(x, y, 9),
+                        Quaternion.identity, transform);
+                        directions += 64;
+                    }
+                    if ((directions & 12) == 12) {//down left
+                        Instantiate(solidRegions[3], new Vector3(x, y, 9),
+                        Quaternion.identity, transform);
+                        directions += 128;
+                    }
+
+                    //Find the correct wall tile
+                    int wallTile = 5;//let default be vertical
+                    int count = (directions & 16) / 16 + (directions & 32) / 32
+                    + (directions & 64) / 64 + (directions & 129) / 128;
+                    if (count == 1) {
+                        if ((directions & 16) != 0) {
+                            wallTile = 9;//up and left
+                        } else if ((directions & 32) != 0) {
+                            wallTile = 3;//up and right
+                        } else if ((directions & 64) != 0) {
+                            wallTile = 6;//down and right
+                        } else if ((directions & 128) != 0) {
+                            wallTile = 12;//down and left
+                        }
+                    } else if ((directions & 15) == 10) {//horizontal
+                        wallTile = 10;
+                    } else if ((directions & 48) == 48) {//horizontal
+                        wallTile = 10;
+                    } else if ((directions & 192) == 192) {//horizontal
+                        wallTile = 10;
+                    }
+                    //TODO more cases for more complex mazes
+
+
+                    if (count != 4) {//count==4 means solid region, no wall
+                        Instantiate(wallTiles[wallTile], new Vector3(x, y, 0),
+                        Quaternion.identity, transform);
+                    }
                 }
 
             }
