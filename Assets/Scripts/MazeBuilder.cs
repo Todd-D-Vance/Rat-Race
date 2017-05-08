@@ -122,81 +122,78 @@ public class MazeBuilder : MonoBehaviour {
 
             c += 3;
         }
-        for (int iter = 0; iter < 10; iter++) {
+        //eliminate dead ends
+        for (int x = 2; x < xSize - 2; x++) {
+            for (int y = 2; y < ySize - 2; y++) {
 
-            //eliminate dead ends
-            for (int x = 2; x < xSize - 2; x++) {
-                for (int y = 2; y < ySize - 2; y++) {
+                if (!grid[x, y]) {//player path space
 
-                    if (!grid[x, y]) {//player path space
-
-                        //look for an adjacent wall
-                        if (grid[x + 1, y] && grid[x + 1, y - 1] && grid[x + 1, y + 1]) {
-                            if (grid[x, y - 2] && grid[x, y + 2]) {
-                                //dead end to the right
-                                if (!grid[x + 2, y]) {// if a thin wall, just eliminate it
-                                    grid[x + 1, y] = false;
-                                    grid[x + 1, y - 1] = false;
-                                    grid[x + 1, y + 1] = false;
-                                } else {//fill it in with wall
-                                    int xx = x;
-                                    while (!grid[xx, y] && !grid[xx - 1, y] && grid[xx, y - 2] && grid[xx, y + 2]) {
-                                        grid[xx, y] = true;
-                                        grid[xx, y - 1] = true;
-                                        grid[xx, y + 1] = true;
-                                        xx--;
-                                    }
+                    //look for an adjacent wall
+                    if (grid[x + 1, y] && grid[x + 1, y - 1] && grid[x + 1, y + 1]) {
+                        if (grid[x, y - 2] && grid[x, y + 2]) {
+                            //dead end to the right
+                            if (!grid[x + 2, y]) {// if a thin wall, just eliminate it
+                                grid[x + 1, y] = false;
+                                grid[x + 1, y - 1] = false;
+                                grid[x + 1, y + 1] = false;
+                            } else {//fill it in with wall
+                                int xx = x;
+                                while (!grid[xx, y] && !grid[xx - 1, y] && grid[xx, y - 2] && grid[xx, y + 2]) {
+                                    grid[xx, y] = true;
+                                    grid[xx, y - 1] = true;
+                                    grid[xx, y + 1] = true;
+                                    xx--;
                                 }
                             }
-                        } else if (grid[x - 1, y] && grid[x - 1, y - 1] && grid[x - 1, y + 1]) {
-                            if (grid[x, y - 2] && grid[x, y + 2]) {
-                                //dead end to the left
-                                if (!grid[x - 2, y]) {// if a thin wall, just eliminate it
-                                    grid[x - 1, y] = false;
-                                    grid[x - 1, y - 1] = false;
-                                    grid[x - 1, y + 1] = false;
-                                } else {//fill it in with wall
-                                    int xx = x;
-                                    while (!grid[xx, y] && !grid[xx + 1, y] && grid[xx, y - 2] && grid[xx, y + 2]) {
-                                        grid[xx, y] = true;
-                                        grid[xx, y - 1] = true;
-                                        grid[xx, y + 1] = true;
-                                        xx++;
-                                    }
+                        }
+                    } else if (grid[x - 1, y] && grid[x - 1, y - 1] && grid[x - 1, y + 1]) {
+                        if (grid[x, y - 2] && grid[x, y + 2]) {
+                            //dead end to the left
+                            if (!grid[x - 2, y]) {// if a thin wall, just eliminate it
+                                grid[x - 1, y] = false;
+                                grid[x - 1, y - 1] = false;
+                                grid[x - 1, y + 1] = false;
+                            } else {//fill it in with wall
+                                int xx = x;
+                                while (!grid[xx, y] && !grid[xx + 1, y] && grid[xx, y - 2] && grid[xx, y + 2]) {
+                                    grid[xx, y] = true;
+                                    grid[xx, y - 1] = true;
+                                    grid[xx, y + 1] = true;
+                                    xx++;
                                 }
                             }
-                        } else if (grid[x, y + 1] && grid[x - 1, y + 1] && grid[x + 1, y + 1]) {
-                            if (grid[x - 2, y] && grid[x + 2, y]) {
-                                //dead end up
-                                if (!grid[x, y + 2]) {// if a thin wall, just eliminate it
-                                    grid[x, y + 1] = false;
-                                    grid[x - 1, y + 1] = false;
-                                    grid[x + 1, y + 1] = false;
-                                } else {//fill it in with wall
-                                    int yy = y;
-                                    while (!grid[x, yy] && !grid[x, yy - 1] && grid[x - 2, yy] && grid[x + 2, yy]) {
-                                        grid[x, yy] = true;
-                                        grid[x - 1, yy] = true;
-                                        grid[x + 1, yy] = true;
-                                        yy--;
-                                    }
+                        }
+                    } else if (grid[x, y + 1] && grid[x - 1, y + 1] && grid[x + 1, y + 1]) {
+                        if (grid[x - 2, y] && grid[x + 2, y]) {
+                            //dead end up
+                            if (!grid[x, y + 2]) {// if a thin wall, just eliminate it
+                                grid[x, y + 1] = false;
+                                grid[x - 1, y + 1] = false;
+                                grid[x + 1, y + 1] = false;
+                            } else {//fill it in with wall
+                                int yy = y;
+                                while (!grid[x, yy] && !grid[x, yy - 1] && grid[x - 2, yy] && grid[x + 2, yy]) {
+                                    grid[x, yy] = true;
+                                    grid[x - 1, yy] = true;
+                                    grid[x + 1, yy] = true;
+                                    yy--;
                                 }
                             }
-                        } else if (grid[x, y - 1] && grid[x - 1, y - 1] && grid[x + 1, y - 1]) {
-                            if (grid[x - 2, y] && grid[x + 2, y]) {
-                                //dead end down
-                                if (!grid[x + 2, y]) {// if a thin wall, just eliminate it
-                                    grid[x, y - 1] = false;
-                                    grid[x - 1, y - 1] = false;
-                                    grid[x + 1, y - 1] = false;
-                                } else {//fill it in with wall
-                                    int yy = y;
-                                    while (!grid[x, yy] && !grid[x, yy + 1] && grid[x - 2, yy] && grid[x + 2, yy]) {
-                                        grid[x, yy] = true;
-                                        grid[x - 1, yy] = true;
-                                        grid[x + 1, yy] = true;
-                                        yy++;
-                                    }
+                        }
+                    } else if (grid[x, y - 1] && grid[x - 1, y - 1] && grid[x + 1, y - 1]) {
+                        if (grid[x - 2, y] && grid[x + 2, y]) {
+                            //dead end down
+                            if (!grid[x + 2, y]) {// if a thin wall, just eliminate it
+                                grid[x, y - 1] = false;
+                                grid[x - 1, y - 1] = false;
+                                grid[x + 1, y - 1] = false;
+                            } else {//fill it in with wall
+                                int yy = y;
+                                while (!grid[x, yy] && !grid[x, yy + 1] && grid[x - 2, yy] && grid[x + 2, yy]) {
+                                    grid[x, yy] = true;
+                                    grid[x - 1, yy] = true;
+                                    grid[x + 1, yy] = true;
+                                    yy++;
                                 }
                             }
                         }
