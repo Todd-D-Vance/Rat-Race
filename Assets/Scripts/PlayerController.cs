@@ -8,11 +8,13 @@ public class PlayerController : MonoBehaviour {
 
     private MazeBuilder maze;
     private Rigidbody2D rb;
+    private Animator animator;
 
     // Use this for initialization
     void Start() {
         maze = FindObjectOfType<MazeBuilder>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -50,6 +52,10 @@ public class PlayerController : MonoBehaviour {
         if (dx != 0 || dy != 0) {
             rb.velocity = new Vector2(dx, dy) * speed;
         }
+
+        animator.SetBool("IsRunning", (rb.velocity.x != 0
+            || rb.velocity.y != 0));
+
         //correct position
         if (dx != 0) {
             int y = Mathf.RoundToInt(transform.position.y);
@@ -58,6 +64,24 @@ public class PlayerController : MonoBehaviour {
         if (dy != 0) {
             int x = Mathf.RoundToInt(transform.position.x);
             transform.position = new Vector3(x, transform.position.y, transform.position.z);
+        }
+
+        //correct rotation
+        if (dx > 0) {
+            transform.rotation =
+                Quaternion.Euler(0, 0, -90);
+        }
+        if (dx < 0) {
+            transform.rotation =
+                Quaternion.Euler(0, 0, 90);
+        }
+        if (dy > 0) {
+            transform.rotation =
+                Quaternion.Euler(0, 0, 0);
+        }
+        if (dy < 0) {
+            transform.rotation =
+                Quaternion.Euler(0, 0, 180);
         }
     }
 }

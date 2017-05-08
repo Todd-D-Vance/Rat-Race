@@ -9,6 +9,8 @@ public class AIController : MonoBehaviour {
     private Rigidbody2D rb;
     private PlayerController player;
     private AStar aStar;
+    private Animator animator;
+
 
     private bool pathsBuilt = false;
 
@@ -17,7 +19,8 @@ public class AIController : MonoBehaviour {
         maze = FindObjectOfType<MazeBuilder>();
         rb = GetComponent<Rigidbody2D>();
         player = FindObjectOfType<PlayerController>();
-        aStar = FindObjectOfType<AStar>();        
+        aStar = FindObjectOfType<AStar>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -62,6 +65,10 @@ public class AIController : MonoBehaviour {
         if (dx != 0 || dy != 0) {
             rb.velocity = new Vector2(dx, dy) * speed;
         }
+
+        animator.SetBool("IsRunning", (rb.velocity.x != 0
+          || rb.velocity.y != 0));
+
         //correct position
         if (dx != 0) {
             int y = Mathf.RoundToInt(transform.position.y);
@@ -70,6 +77,24 @@ public class AIController : MonoBehaviour {
         if (dy != 0) {
             int x = Mathf.RoundToInt(transform.position.x);
             transform.position = new Vector3(x, transform.position.y, transform.position.z);
+        }
+
+        //correct rotation
+        if (dx > 0) {
+            transform.rotation =
+                Quaternion.Euler(0, 0, -90);
+        }
+        if (dx < 0) {
+            transform.rotation =
+                Quaternion.Euler(0, 0, 90);
+        }
+        if (dy > 0) {
+            transform.rotation =
+                Quaternion.Euler(0, 0, 0);
+        }
+        if (dy < 0) {
+            transform.rotation =
+                Quaternion.Euler(0, 0, 180);
         }
     }
 

@@ -135,7 +135,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1593259607}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &156560761
 SpriteRenderer:
@@ -829,7 +829,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca71094832b4f14388cb1da3489eeb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallPrefab: {fileID: 1468052087934756, guid: ba5ea5d998cd323429d8f1c0bbc5dac5, type: 2}
   exterior: {fileID: 1221461086490554, guid: 048c31cc62f3fd948b0bb72f4c27dafb, type: 2}
   solidRegions:
   - {fileID: 1714172273603792, guid: 96623f3c74dfa7a46bc50a36988dfa29, type: 2}
@@ -1542,7 +1541,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1593259607}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1555860586
 SpriteRenderer:
@@ -1660,8 +1659,8 @@ Transform:
   - {fileID: 240663483}
   - {fileID: 845706504}
   - {fileID: 335797926}
-  - {fileID: 156560760}
   - {fileID: 1555860585}
+  - {fileID: 156560760}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
