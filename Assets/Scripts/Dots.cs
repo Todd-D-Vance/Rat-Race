@@ -35,6 +35,7 @@ public class Dots : MonoBehaviour {
                     numDots++;
                 }
             }
-        }        
+        }
+        FindObjectOfType<Game>().state = Game.State.PLAY;
     }
 }
