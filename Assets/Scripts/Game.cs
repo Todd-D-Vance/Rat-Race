@@ -15,12 +15,21 @@ public class Game : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
-        if (state == State.PLAY && CountDots() <= 0) {
-            state = State.END_LEVEL;
-            SceneManager.LoadScene("Win");
+    // Update is called once per frame
+    void Update() {        
+        switch (state) {
+            case State.PLAY:
+                if (CountDots() <= 0) {
+                    state = State.END_LEVEL;
+                }
+                break;
+            case State.END_LEVEL:
+                Invoke("LevelUp", 1.0f);
+                break;
+
+                //TODO add more
         }
-    }
+    }    
 
     public int CountDots() {
         if (!dots) {
@@ -31,6 +40,11 @@ public class Game : MonoBehaviour {
             count++;
         }
         return count;
+    }
+
+    void LevelUp() {
+        //TODO: level up sound/anamation
+        SceneManager.LoadScene("Win");
     }
 
     public enum State {

@@ -5,12 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class AIController : MonoBehaviour {
     public float speed = 10.0f;
+    public Vector3 initialPosition;
+    public Vector3 initialRotation;
 
     private MazeBuilder maze;
     private Rigidbody2D rb;
     private PlayerController player;
     private AStar aStar;
     private Animator animator;
+    private Game game;
+
 
 
     private bool pathsBuilt = false;
@@ -22,6 +26,7 @@ public class AIController : MonoBehaviour {
         player = FindObjectOfType<PlayerController>();
         aStar = FindObjectOfType<AStar>();
         animator = GetComponent<Animator>();
+        game = FindObjectOfType<Game>();
     }
 
     // Update is called once per frame
@@ -63,6 +68,12 @@ public class AIController : MonoBehaviour {
     }
 
     void Move(int dx, int dy) {
+        if (game.state != Game.State.PLAY) {
+            animator.SetBool("IsRunning", false);
+            rb.velocity = Vector2.zero;
+            return;
+        }
+
         if (dx != 0 || dy != 0) {
             rb.velocity = new Vector2(dx, dy) * speed;
         }
@@ -112,8 +123,13 @@ public class AIController : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Player") {
-            SceneManager.LoadScene("GameOver");
+            game.state = Game.State.DEATH;
         }
+    }
+
+    public void ResetEnemy() {
+        transform.position = initialPosition;
+        transform.eulerAngles = initialRotation;
     }
 
 }

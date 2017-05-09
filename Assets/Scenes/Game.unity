@@ -1468,6 +1468,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  initialPosition: {x: 45, y: 61, z: 0}
+  initialRotation: {x: 0, y: 0, z: 0}
 --- !u!95 &1334509211
 Animator:
   serializedVersion: 3
@@ -1717,6 +1719,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  initialPosition: {x: 2, y: 2, z: 0}
+  initialRotation: {x: 0, y: 0, z: 0}
 --- !u!50 &1593259609
 Rigidbody2D:
   serializedVersion: 4
