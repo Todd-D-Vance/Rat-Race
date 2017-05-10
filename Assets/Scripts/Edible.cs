@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Edible : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    private SoundPlayer sound = SoundPlayer.instance;
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -22,8 +24,8 @@ public class Edible : MonoBehaviour {
                     enemy.flee += 10;
                 }
             }
+            sound.Gulp();
             GameObject.Destroy(gameObject, .1f);//give it 1/10 second to be swallowed
-            Debug.Log("Gulp");//todo, add to score
         }
     }
 }

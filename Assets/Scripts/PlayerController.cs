@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour {
     private Game game;
     private AIController aCat;
     private BoxCollider2D theCollider;
+    private SoundPlayer sound = SoundPlayer.instance;
+
 
     // Use this for initialization
     void Start() {
@@ -82,6 +84,14 @@ public class PlayerController : MonoBehaviour {
 
         animator.SetBool("IsRunning", (rb.velocity.x != 0
             || rb.velocity.y != 0));
+
+        if (Random.value < Time.deltaTime) {
+            if (aCat.flee > 0) {
+                sound.BigSqueak();
+            } else {
+                sound.Squeak();
+            }
+        }
 
         //Teleport
         int x = Mathf.RoundToInt(transform.position.x);

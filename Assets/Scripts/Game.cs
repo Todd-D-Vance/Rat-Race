@@ -8,10 +8,15 @@ public class Game : MonoBehaviour {
     public State state = State.INTRO;
 
     private Dots dots;
+    private MusicPlayer music = MusicPlayer.instance;
 
     // Use this for initialization
     void Start () {
         dots = FindObjectOfType<Dots>();
+        music.PlayTune("O4 R8 C E- G O5 C "
+                + "O4 E- G O5 C E-"
+                + "O4 G O5 C E- G"
+                + "R4 C O4 R2 C");
     }
 
     // Update is called once per frame
