@@ -7,6 +7,7 @@ public class AIController : MonoBehaviour {
     public float speed = 10.0f;
     public Vector3 initialPosition;
     public Vector3 initialRotation;
+    public float flee = 0;
 
     private MazeBuilder maze;
     private Rigidbody2D rb;
@@ -52,6 +53,11 @@ public class AIController : MonoBehaviour {
             GetInput(out dx, out dy);
             Move(dx, dy);
         }
+        if (flee > 0) {
+            flee -= Time.deltaTime;
+        } else {
+            flee = 0;
+        }
     }
 
     void GetInput(out int dx, out int dy) {
@@ -60,8 +66,22 @@ public class AIController : MonoBehaviour {
         int x = Mathf.RoundToInt(transform.position.x);
         int y = Mathf.RoundToInt(transform.position.y);
 
-        //build paths to the player
-        aStar.RebuildAI(Mathf.RoundToInt(player.transform.position.x), Mathf.RoundToInt(player.transform.position.y));
+        if (flee > 0) {
+            //build paths away from player
+            int xx = 2;
+            int yy = 2;
+            if (player.transform.position.x < 24) {
+                xx = 45;
+            }
+            if (player.transform.position.y < 32) {
+                yy = 61;
+            }
+
+            aStar.RebuildAI(xx, yy);
+        } else {
+            //build paths to player
+            aStar.RebuildAI(Mathf.RoundToInt(player.transform.position.x), Mathf.RoundToInt(player.transform.position.y));
+        }
 
         //if still in box, move in direction it is facing
         if (!deployed) {
@@ -152,7 +172,12 @@ public class AIController : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Player") {
-            game.state = Game.State.DEATH;
+            if (player && flee > 0) {
+                //Eat the cat!
+                ResetEnemy();
+            } else {
+                game.state = Game.State.DEATH;
+            }
         }
     }
 

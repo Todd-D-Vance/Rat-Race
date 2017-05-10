@@ -1452,6 +1452,7 @@ MonoBehaviour:
   speed: 10
   initialPosition: {x: 25, y: 32, z: 0}
   initialRotation: {x: 0, y: 0, z: 0}
+  flee: 0
 --- !u!50 &785074946
 Rigidbody2D:
   serializedVersion: 4
@@ -1820,6 +1821,7 @@ MonoBehaviour:
   speed: 10
   initialPosition: {x: 28, y: 32, z: 0}
   initialRotation: {x: 0, y: 0, z: -90}
+  flee: 0
 --- !u!50 &858921795
 Rigidbody2D:
   serializedVersion: 4
@@ -2696,6 +2698,7 @@ MonoBehaviour:
   speed: 10
   initialPosition: {x: 19, y: 32, z: 0}
   initialRotation: {x: 0, y: 0, z: 90}
+  flee: 0
 --- !u!95 &1334509211
 Animator:
   serializedVersion: 3
@@ -3411,6 +3414,7 @@ MonoBehaviour:
   speed: 10
   initialPosition: {x: 22, y: 32, z: 0}
   initialRotation: {x: 0, y: 0, z: 180}
+  flee: 0
 --- !u!50 &1672658973
 Rigidbody2D:
   serializedVersion: 4
@@ -3613,6 +3617,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d064a9db4f721b24482f785b242113f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avoid:
+  - {fileID: 1334509205}
+  - {fileID: 1672658970}
+  - {fileID: 785074943}
+  - {fileID: 858921792}
 --- !u!4 &1722192480
 Transform:
   m_ObjectHideFlags: 0

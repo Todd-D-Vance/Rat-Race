@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class AStar : MonoBehaviour {
 
+    public GameObject[] avoid;
+
     private GridPoint destination = new GridPoint() { x = 2, y = 2 };
 
     private int[,] grid;
@@ -15,6 +17,13 @@ public class AStar : MonoBehaviour {
         destination.x = x;
         destination.y = y;
         ResetAI();
+        foreach (GameObject a in avoid) {
+            int ax = Mathf.RoundToInt(a.transform.position.x);
+            int ay = Mathf.RoundToInt(a.transform.position.y);
+            if (grid[ax, ay] > 0) {
+                grid[ax, ay] = 100;//make cats undesireable to each other
+            }
+        }
         BuildPaths(destination);
     }
 
