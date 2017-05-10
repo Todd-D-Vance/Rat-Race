@@ -14,7 +14,12 @@ public class AIController : MonoBehaviour {
     private AStar aStar;
     private Animator animator;
     private Game game;
+    private BoxCollider2D theCollider;
 
+    private int initDx = 0;
+    private int initDy = 0;
+    private float delay = 0;
+    private bool deployed = false;
 
 
     private bool pathsBuilt = false;
@@ -27,6 +32,9 @@ public class AIController : MonoBehaviour {
         aStar = FindObjectOfType<AStar>();
         animator = GetComponent<Animator>();
         game = FindObjectOfType<Game>();
+        theCollider = GetComponent<BoxCollider2D>();
+
+        ResetEnemy();
     }
 
     // Update is called once per frame
@@ -37,9 +45,13 @@ public class AIController : MonoBehaviour {
             return;
         }
 
-        int dx, dy;
-        GetInput(out dx, out dy);
-        Move(dx, dy);
+        if (delay > 0) {
+            delay -= Time.deltaTime;
+        } else {
+            int dx, dy;
+            GetInput(out dx, out dy);
+            Move(dx, dy);
+        }
     }
 
     void GetInput(out int dx, out int dy) {
@@ -50,6 +62,23 @@ public class AIController : MonoBehaviour {
 
         //build paths to the player
         aStar.RebuildAI(Mathf.RoundToInt(player.transform.position.x), Mathf.RoundToInt(player.transform.position.y));
+
+        //if still in box, move in direction it is facing
+        if (!deployed) {
+            float tx = transform.position.x;
+            float ty = transform.position.y;
+            float tz = transform.position.z;
+            tx += initDx * speed * Time.deltaTime;
+            ty += initDy * speed * Time.deltaTime;
+            if (aStar.GetDist(x, y) < 0) {
+                transform.position = new Vector3(tx, ty, tz);
+            } else { //ensure on a valid grid space and deploy            
+                transform.position = new Vector3(x, y, tz);
+                deployed = true;
+                theCollider.enabled = true;//re-enable collider
+            }
+            return;
+        }
 
         //set current location to where the enemy is now
         GridPoint current = new GridPoint() { x = Mathf.RoundToInt(transform.position.x), y = Mathf.RoundToInt(transform.position.y) };
@@ -130,6 +159,32 @@ public class AIController : MonoBehaviour {
     public void ResetEnemy() {
         transform.position = initialPosition;
         transform.eulerAngles = initialRotation;
+        int angle = Mathf.RoundToInt(initialRotation.z);
+        if (angle < 0) {//need angle from 0 to 359
+            angle += 360;
+        }
+        switch (angle) {
+            case 0:
+                initDy = 1;
+                break;
+            case 90:
+                initDx = -1;
+                break;
+            case 180:
+                initDy = -1;
+                break;
+            case 270:
+                initDx = 1;
+                break;
+            default:
+                throw new UnityException("Cat not pointing N,S,E, or W");
+        }
+        delay = angle / 9; //start one new cat every 10 seconds
+        deployed = false;
+
+        theCollider.enabled = false;//disable to allow escaping from cat box
+
+        rb.velocity = Vector2.zero;
     }
 
 }

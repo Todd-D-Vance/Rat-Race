@@ -71,13 +71,27 @@ public class PlayerController : MonoBehaviour {
         animator.SetBool("IsRunning", (rb.velocity.x != 0
             || rb.velocity.y != 0));
 
+        //Teleport
+        int x = Mathf.RoundToInt(transform.position.x);
+        int y = Mathf.RoundToInt(transform.position.y);
+
+        if (y == 32) {
+            if (x == 14 && rb.velocity.x > 0) {
+                Debug.Log("dx=" + dx);
+                x = 32;
+                transform.position = new Vector3(x, y, transform.position.z);
+            } else if (x == 32 && rb.velocity.x < 0) {
+                x = 14;
+                transform.position = new Vector3(x, y, transform.position.z);
+            }
+        }
+
+
         //correct position
         if (dx != 0) {
-            int y = Mathf.RoundToInt(transform.position.y);
             transform.position = new Vector3(transform.position.x, y, transform.position.z);
         }
         if (dy != 0) {
-            int x = Mathf.RoundToInt(transform.position.x);
             transform.position = new Vector3(x, transform.position.y, transform.position.z);
         }
 
