@@ -17,6 +17,7 @@ public class AIController : MonoBehaviour {
     private BoxCollider2D theCollider;
     private SoundPlayer sound = SoundPlayer.instance;
     private GameStateManager gsm = GameStateManager.instance;
+    private Score score;
 
     private int initDx = 0;
     private int initDy = 0;
@@ -34,6 +35,15 @@ public class AIController : MonoBehaviour {
         aStar = FindObjectOfType<AStar>();
         animator = GetComponent<Animator>();
         theCollider = GetComponent<BoxCollider2D>();
+
+        foreach (Score s in FindObjectsOfType<Score>()) {
+            if (s.gameObject.name == "Score") {
+                score = s;
+            }
+        }
+        if (!score) {
+            throw new UnityException("Score object not found");
+        }
 
         ResetEnemy();
     }
@@ -178,6 +188,8 @@ public class AIController : MonoBehaviour {
         if (collision.gameObject.tag == "Player") {
             if (player && flee > 0) {
                 //Eat the cat!
+                score.Add(player.GetCatValue());
+                player.DoubleCatValue();
                 sound.BigGulp();
                 ResetEnemy();
             } else {

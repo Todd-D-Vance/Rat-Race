@@ -48,12 +48,20 @@ public class GameStateManager : MonoBehaviour {
         switch (state) {
             case State.INVALID:
                 throw new UnityException("Invalid Game State");
+
             case State.INIT:
-                if (framesInState == 0) {//if beginning of state
+                if (framesInState == 5) {
+                    music.PlayTune("O4 R8 C E- G O5 C "
+                           + "O4 E- G O5 C E-"
+                           + "O4 G O5 C E- G"
+                           + "R4 C O4 R2 C");
+                }
+                if (framesInState == 150) {
                     SceneManager.LoadScene(titleScene);
                     state = State.ATTRACT_MODE_TITLE;
-                }
+                }               
                 break;
+
             case State.ATTRACT_MODE_TITLE:
                 if (timeInState >= 10.0f) {
                     SceneManager.LoadScene(descriptionScene);
@@ -87,6 +95,8 @@ public class GameStateManager : MonoBehaviour {
             case State.GAME_MODE_INTRO:
                 if (framesInState == 7) {//wait some ticks for scene to 
                                          //change to prevent glitch
+                    PlayerPrefs.SetInt("Score", 0);
+                    GetScoreObject().Reset();
                     if (music) {
                         music.PlayTune("R4 O3 B- B- B- B- R8 O5 E- E- D E- F G F E- O3 B- O5 E- O4 E-");
                     }
@@ -124,6 +134,7 @@ public class GameStateManager : MonoBehaviour {
 
             case State.GAME_MODE_DEATH:
                 if (framesInState == 0) {
+                    PlayerPrefs.SetInt("Score", GetScoreObject().Get());
                     if (music) {//death music
                         music.PlayTune("R8 O4 C O3 C");
                     }
@@ -154,6 +165,9 @@ public class GameStateManager : MonoBehaviour {
                         music.PlayTune("R8 O3 B- R4 B-");
                     }
                 }
+                if (framesInState == 7) {
+                    GetScoreObject().Set(PlayerPrefs.GetInt("Score"));
+                }
                 if (timeInState > 1f) {
                     state = State.GAME_MODE_PLAY;
                 }
@@ -161,6 +175,7 @@ public class GameStateManager : MonoBehaviour {
 
             case State.GAME_MODE_END_LEVEL:
                 if (framesInState == 0) {
+                    PlayerPrefs.SetInt("Score", GetScoreObject().Get());
                     if (music) {
                         music.PlayTune("R16 O4 E- G B- E- G B- E- G F A- G D E-");
                     }
@@ -198,6 +213,15 @@ public class GameStateManager : MonoBehaviour {
 
     public void LoadPreviousState() {
         state = lastState;
+    }
+
+    Score GetScoreObject() {
+        foreach (Score s in FindObjectsOfType<Score>()) {
+            if (s.gameObject.name == "Score") {
+                return s;
+            }
+        }
+        throw new UnityException("Score object not found");
     }
 
     public enum State {

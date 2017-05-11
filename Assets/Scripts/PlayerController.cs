@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour {
     private GameStateManager gsm = GameStateManager.instance;
 
 
+    private int catValue = 200;
+
     // Use this for initialization
     void Start() {
         maze = FindObjectOfType<MazeBuilder>();
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour {
         } else {
             transform.localScale = new Vector3(1, 1, 1);
             theCollider.size = new Vector2(2.7f, 2.7f);
+            catValue = 200;
         }
     }
 
@@ -141,6 +144,14 @@ public class PlayerController : MonoBehaviour {
         foreach(AIController enemy in FindObjectsOfType<AIController>()) {
             enemy.ResetEnemy();
         }
+    }
+
+    public void DoubleCatValue() {
+        catValue *= 2;
+    }
+
+    public int GetCatValue() {
+        return catValue;
     }
 
 }
