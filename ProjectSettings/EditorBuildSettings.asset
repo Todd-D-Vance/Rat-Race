@@ -9,20 +9,23 @@ EditorBuildSettings:
     path: Assets/Scenes/_Init.unity
     guid: 3442b153750acfc498becaf358e7482f
   - enabled: 1
-    path: Assets/Scenes/Game.unity
-    guid: 7899f0b2fd3eb624abb4e4d67391329e
-  - enabled: 1
-    path: Assets/Scenes/GameOver.unity
-    guid: 1a6b799be62a13b42b9e0f1964444a4c
-  - enabled: 1
-    path: Assets/Scenes/Win.unity
-    guid: 694983d8f805fd84a85134442787eae0
-  - enabled: 1
     path: Assets/Scenes/Title.unity
     guid: b745ed2a126cc2240886c1b2110414af
   - enabled: 1
     path: Assets/Scenes/Description.unity
     guid: 9ebec61f3a9505e47ab934364f019bc8
   - enabled: 1
+    path: Assets/Scenes/HighScores.unity
+    guid: e544db4768c0f2946be28335e1b8fbda
+  - enabled: 1
+    path: Assets/Scenes/Demo.unity
+    guid: 7c91757ff5d527842917e044ba76016b
+  - enabled: 1
     path: Assets/Scenes/Options.unity
     guid: 1bbc1c5a016bb6f428d814fedabf4ebe
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: 7899f0b2fd3eb624abb4e4d67391329e
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 1a6b799be62a13b42b9e0f1964444a4c

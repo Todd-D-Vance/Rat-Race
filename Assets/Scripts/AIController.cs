@@ -14,9 +14,9 @@ public class AIController : MonoBehaviour {
     private PlayerController player;
     private AStar aStar;
     private Animator animator;
-    private Game game;
     private BoxCollider2D theCollider;
     private SoundPlayer sound = SoundPlayer.instance;
+    private GameStateManager gsm = GameStateManager.instance;
 
     private int initDx = 0;
     private int initDy = 0;
@@ -33,7 +33,6 @@ public class AIController : MonoBehaviour {
         player = FindObjectOfType<PlayerController>();
         aStar = FindObjectOfType<AStar>();
         animator = GetComponent<Animator>();
-        game = FindObjectOfType<Game>();
         theCollider = GetComponent<BoxCollider2D>();
 
         ResetEnemy();
@@ -89,7 +88,7 @@ public class AIController : MonoBehaviour {
         }
 
         //if still in box, move in direction it is facing
-        if (!deployed) {
+        if (!deployed && gsm.state == GameStateManager.State.GAME_MODE_PLAY) {
             float tx = transform.position.x;
             float ty = transform.position.y;
             float tz = transform.position.z;
@@ -122,7 +121,7 @@ public class AIController : MonoBehaviour {
     }
 
     void Move(int dx, int dy) {
-        if (game.state != Game.State.PLAY) {
+        if (gsm.state != GameStateManager.State.GAME_MODE_PLAY) {
             animator.SetBool("IsRunning", false);
             rb.velocity = Vector2.zero;
             return;
@@ -182,7 +181,7 @@ public class AIController : MonoBehaviour {
                 sound.BigGulp();
                 ResetEnemy();
             } else {
-                game.state = Game.State.DEATH;
+                gsm.state = GameStateManager.State.GAME_MODE_DEATH;
             }
         }
     }

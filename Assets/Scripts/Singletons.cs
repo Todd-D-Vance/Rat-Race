@@ -8,14 +8,4 @@ public class Singletons : MonoBehaviour {
     private void Awake() {
         DontDestroyOnLoad(gameObject);
     }
-
-    // Use this for initialization
-    void Start() {
-        SceneManager.LoadScene("Title");
-    }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Edible : MonoBehaviour {
 
     private SoundPlayer sound = SoundPlayer.instance;
+    private GameStateManager gsm = GameStateManager.instance;
 
     // Use this for initialization
     void Start () {
@@ -17,7 +18,7 @@ public class Edible : MonoBehaviour {
 	}
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.tag == "Player") {
+        if (collision.gameObject.tag == "Player" && gsm.state==GameStateManager.State.GAME_MODE_PLAY) {
             if (gameObject.tag == "Growth") {
                 //make cats flee
                 foreach (AIController enemy in FindObjectsOfType<AIController>()) {

@@ -4,27 +4,23 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
 public class Options : MonoBehaviour {
 
-    public Slider musicVolumeControl;
     public Slider sfxVolumeControl;
+    public Slider musicVolumeControl;
 
-    Preferences preferences = Preferences.instance;
+    private Preferences preferences = Preferences.instance;
+    private GameStateManager gsm = GameStateManager.instance;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start() {
         musicVolumeControl.value = preferences.musicVolume;
         sfxVolumeControl.value = preferences.sfxVolume;
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public void Return() {
         SceneManager.UnloadSceneAsync("Options");
+        gsm.LoadPreviousState();
     }
 
     public void ChangeSFXVolume() {
