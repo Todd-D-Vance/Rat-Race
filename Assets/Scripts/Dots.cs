@@ -98,9 +98,14 @@ public class Dots : MonoBehaviour {
             upperRight.gameObject.tag = "Growth";
             upperRight.transform.localScale *= 3;
         }
-
-        FindObjectOfType<Game>().state = Game.State.PLAY;
     }
 
+    public int CountDots() {      
+        int count = 0;
+        foreach (Transform dot in transform) {
+            count++;
+        }
+        return count;
+    }
 
 }
