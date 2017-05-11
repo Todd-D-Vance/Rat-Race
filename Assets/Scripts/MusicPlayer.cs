@@ -11,6 +11,7 @@ public class MusicPlayer : MonoBehaviour {
     private Queue<float> durations = new Queue<float>();
 
     private AudioSource source;
+    private Preferences preferences;
 
     private float currentOctave = 4;
     private float halfStep = 1.05946309436f;
@@ -23,8 +24,9 @@ public class MusicPlayer : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        source = GetComponent<AudioSource>();	
-	}
+        source = GetComponent<AudioSource>();
+        preferences = Preferences.instance;
+    }
 
     // Update is called once per frame
     void Update() {
@@ -32,6 +34,7 @@ public class MusicPlayer : MonoBehaviour {
             if (pitches.Count > 0) {//if any notes remain to be played
                 float pitch = pitches.Dequeue();
                 float duration = durations.Dequeue();
+                source.volume = preferences.musicVolume;
                 source.pitch = pitch;
                 source.Play();
                 timeRemaining = duration;

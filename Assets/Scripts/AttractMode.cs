@@ -17,13 +17,20 @@ public class AttractMode : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        timeRemaining -= Time.deltaTime;
-        if (timeRemaining <= 0) {
-            SceneManager.LoadScene(nextScene);
+        if (SceneManager.sceneCount <= 1) {
+            timeRemaining -= Time.deltaTime;
+            if (timeRemaining <= 0) {
+                SceneManager.LoadScene(nextScene);
+            }
         }
     }
 
     public void PlayGame() {
         SceneManager.LoadScene("Game");
+    }
+
+    public void Options() {
+        SceneManager.LoadSceneAsync("Options",
+                LoadSceneMode.Additive);
     }
 }
