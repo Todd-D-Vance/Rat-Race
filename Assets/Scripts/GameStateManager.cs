@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameStateManager : MonoBehaviour {
     public static GameStateManager instance;
 
-
+    public bool recordThisGame = true;
     public State state = State.INIT;
     public float timeInState = 0;
     public int framesInState = 0;
@@ -16,11 +16,11 @@ public class GameStateManager : MonoBehaviour {
     public string demoScene = "Demo";
 
     private MusicPlayer music;
+    private Recorder recorder;
 
     private Queue<State> previousStates = new Queue<State>();
     private State stateLastFrame = State.INVALID;
     private State lastState = State.INVALID;
-
 
     private void Awake() {
         instance = this;
@@ -29,6 +29,7 @@ public class GameStateManager : MonoBehaviour {
     // Use this for initialization
     void Start() {
         music = MusicPlayer.instance;
+        recorder = Recorder.instance;
     }
 
     // Update is called once per frame
@@ -59,7 +60,7 @@ public class GameStateManager : MonoBehaviour {
                 if (framesInState == 150) {
                     SceneManager.LoadScene(titleScene);
                     state = State.ATTRACT_MODE_TITLE;
-                }               
+                }
                 break;
 
             case State.ATTRACT_MODE_TITLE:
@@ -81,7 +82,7 @@ public class GameStateManager : MonoBehaviour {
                 }
                 break;
             case State.ATTRACT_MODE_DEMO:
-                if (timeInState >= 10.0f) {
+                if (timeInState >= 40.0f) {
                     SceneManager.LoadScene(titleScene);
                     state = State.ATTRACT_MODE_TITLE;
                 }
@@ -93,6 +94,11 @@ public class GameStateManager : MonoBehaviour {
                 break;
 
             case State.GAME_MODE_INTRO:
+                if (framesInState == 0) {
+                    if (recordThisGame) {
+                        recorder.StartRecording();
+                    }
+                }
                 if (framesInState == 7) {//wait some ticks for scene to 
                                          //change to prevent glitch
                     PlayerPrefs.SetInt("Score", 0);
@@ -108,6 +114,10 @@ public class GameStateManager : MonoBehaviour {
                 break;
 
             case State.GAME_MODE_PLAY:
+                if (framesInState > 7 && recordThisGame) {//don't record first few frames
+                                                          //advance frame
+                    recorder.CreateFrame();
+                }
                 //delay so level doesn't end before dots are created
                 if (timeInState > 0.1f) {
                     Dots dots = FindObjectOfType<Dots>();
@@ -133,6 +143,12 @@ public class GameStateManager : MonoBehaviour {
                 break;
 
             case State.GAME_MODE_DEATH:
+                if (framesInState == 0) {
+                    if (recordThisGame) {
+                        recorder.StopRecording();
+                        recordThisGame = false;
+                    }
+                }
                 if (framesInState == 0) {
                     PlayerPrefs.SetInt("Score", GetScoreObject().Get());
                     if (music) {//death music
@@ -174,6 +190,12 @@ public class GameStateManager : MonoBehaviour {
                 break;
 
             case State.GAME_MODE_END_LEVEL:
+                if (framesInState == 0) {
+                    if (recordThisGame) {
+                        recorder.StopRecording();
+                        recordThisGame = false;
+                    }
+                }
                 if (framesInState == 0) {
                     PlayerPrefs.SetInt("Score", GetScoreObject().Get());
                     if (music) {

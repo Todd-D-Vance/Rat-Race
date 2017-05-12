@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
     private BoxCollider2D theCollider;
     private SoundPlayer sound = SoundPlayer.instance;
     private GameStateManager gsm = GameStateManager.instance;
+    private Recorder recorder = Recorder.instance;
 
 
     private int catValue = 200;
@@ -26,6 +27,9 @@ public class PlayerController : MonoBehaviour {
         animator = GetComponent<Animator>();
         aCat = FindObjectOfType<AIController>();
         theCollider = GetComponent<BoxCollider2D>();
+        if (gsm.recordThisGame) {
+            recorder.RecordIfRecording(recorder.CreateCommand(gameObject));
+        }
     }
 
     // Update is called once per frame
@@ -46,6 +50,13 @@ public class PlayerController : MonoBehaviour {
             transform.localScale = new Vector3(1, 1, 1);
             theCollider.size = new Vector2(2.7f, 2.7f);
             catValue = 200;
+        }
+    }
+
+    private void LateUpdate() {
+        //update recording
+        if (gsm.framesInState > 7 && gsm.recordThisGame && gsm.state == GameStateManager.State.GAME_MODE_PLAY) {
+            recorder.RecordIfRecording(recorder.MoveCommand(gameObject));
         }
     }
 

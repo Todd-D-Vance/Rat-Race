@@ -7,6 +7,7 @@ public class Edible : MonoBehaviour {
     private SoundPlayer sound = SoundPlayer.instance;
     private GameStateManager gsm = GameStateManager.instance;
     private Score score;
+    private Recorder recorder = Recorder.instance;
 
 
     // Use this for initialization
@@ -28,6 +29,10 @@ public class Edible : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == "Player" && gsm.state==GameStateManager.State.GAME_MODE_PLAY) {
+            //update recording
+            if (gsm.framesInState > 7 && gsm.recordThisGame && gsm.state == GameStateManager.State.GAME_MODE_PLAY) {
+                recorder.RecordIfRecording(recorder.DestroyCommand(gameObject));
+            }
             if (gameObject.tag == "Growth") {
                 //make cats flee
                 foreach (AIController enemy in FindObjectsOfType<AIController>()) {

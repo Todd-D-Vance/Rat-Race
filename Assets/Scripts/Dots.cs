@@ -8,6 +8,8 @@ public class Dots : MonoBehaviour {
 
     private MazeBuilder maze;
     private AStar aStar;
+    private Recorder recorder = Recorder.instance;
+    private GameStateManager gsm = GameStateManager.instance;
 
     int frame = 0;
 
@@ -31,7 +33,10 @@ public class Dots : MonoBehaviour {
             for (int y = 0; y < maze.ySize; y++) {
                 int d = aStar.GetDist(x, y);
                 if (maze.IsPlayerSpace(x, y) && d > 0 && d % 2 == 1) {
-                    Instantiate(DotPrefab, new Vector3(x, y, 1), Quaternion.identity, transform);
+                    GameObject g = Instantiate(DotPrefab, new Vector3(x, y, 1), Quaternion.identity, transform);
+                    if (gsm.recordThisGame) {
+                        recorder.RecordIfRecording(recorder.CreateCommand(g));
+                    }
                     numDots++;
                 }
             }
@@ -85,18 +90,30 @@ public class Dots : MonoBehaviour {
         if (lowerLeft) {
             lowerLeft.gameObject.tag = "Growth";
             lowerLeft.transform.localScale *= 3;
+            if (gsm.recordThisGame) {
+                recorder.RecordIfRecording(recorder.ModifyCommand(lowerLeft.gameObject));
+            }
         }
         if (lowerRight) {
             lowerRight.gameObject.tag = "Growth";
             lowerRight.transform.localScale *= 3;
+            if (gsm.recordThisGame) {
+                recorder.RecordIfRecording(recorder.ModifyCommand(lowerRight.gameObject));
+            }
         }
         if (upperLeft) {
             upperLeft.gameObject.tag = "Growth";
             upperLeft.transform.localScale *= 3;
+            if (gsm.recordThisGame) {
+                recorder.RecordIfRecording(recorder.ModifyCommand(upperLeft.gameObject));
+            }
         }
         if (upperRight) {
             upperRight.gameObject.tag = "Growth";
             upperRight.transform.localScale *= 3;
+            if (gsm.recordThisGame) {
+                recorder.RecordIfRecording(recorder.ModifyCommand(upperRight.gameObject));
+            }
         }
     }
 
