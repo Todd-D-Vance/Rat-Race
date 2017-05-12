@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,6 +8,7 @@ public class GameStateManager : MonoBehaviour {
     public static GameStateManager instance;
 
     public bool recordThisGame = true;
+    public int numberOfLivesRemaining;
     public State state = State.INIT;
     public float timeInState = 0;
     public int framesInState = 0;
@@ -14,13 +16,18 @@ public class GameStateManager : MonoBehaviour {
     public string descriptionScene = "Description";
     public string highScoreScene = "HighScores";
     public string demoScene = "Demo";
+    public GameObject gameOverPrefab;
+    public int placeInHighScoreList = 0;
 
     private MusicPlayer music;
     private Recorder recorder;
+    private HighScores highScores;
 
     private Queue<State> previousStates = new Queue<State>();
     private State stateLastFrame = State.INVALID;
     private State lastState = State.INVALID;
+    private int numberOfLevelsPlayed = 0;
+
 
     private void Awake() {
         instance = this;
@@ -30,6 +37,7 @@ public class GameStateManager : MonoBehaviour {
     void Start() {
         music = MusicPlayer.instance;
         recorder = Recorder.instance;
+        highScores = HighScores.instance;
     }
 
     // Update is called once per frame
@@ -98,12 +106,16 @@ public class GameStateManager : MonoBehaviour {
                     if (recordThisGame) {
                         recorder.StartRecording();
                     }
+                    numberOfLivesRemaining = 3;
+                    numberOfLevelsPlayed = 0;
                 }
                 if (framesInState == 7) {//wait some ticks for scene to 
                                          //change to prevent glitch
-                    PlayerPrefs.SetInt("Score", 0);
-                    GetScoreObject().Reset();
-                    if (music) {
+                    if (music.paused) {
+                        music.paused = false;
+                    } else {
+                        PlayerPrefs.SetInt("Score", 0);
+                        GetScoreObject().Reset();
                         music.PlayTune("R4 O3 B- B- B- B- R8 O5 E- E- D E- F G F E- O3 B- O5 E- O4 E-");
                     }
                 }
@@ -114,6 +126,7 @@ public class GameStateManager : MonoBehaviour {
                 break;
 
             case State.GAME_MODE_PLAY:
+                music.paused = false;
                 if (framesInState > 7 && recordThisGame) {//don't record first few frames
                                                           //advance frame
                     recorder.CreateFrame();
@@ -155,6 +168,12 @@ public class GameStateManager : MonoBehaviour {
                         music.PlayTune("R8 O4 C O3 C");
                     }
                 }
+                if (framesInState == 7) {
+                    numberOfLivesRemaining--;
+                    if (numberOfLivesRemaining <= 0) {
+                        state = State.GAME_MODE_GAME_OVER;
+                    }
+                }
                 if (framesInState < 60) {//a "death animation"
                     PlayerController player = FindObjectOfType<PlayerController>();
                     player.transform.eulerAngles += new Vector3(0, 0, 5);
@@ -173,6 +192,19 @@ public class GameStateManager : MonoBehaviour {
                 break;
 
             case State.GAME_MODE_GAME_OVER:
+                if (framesInState == 0) {
+                    Instantiate(gameOverPrefab, FindObjectOfType<Canvas>().transform);
+                    Destroy(FindObjectOfType<PlayerController>().gameObject);
+                    placeInHighScoreList = highScores.NewHighScore(GetScoreObject().Get(), Environment.UserName);
+                }
+                if (framesInState == 240) {
+                    if (placeInHighScoreList > 0) {
+                        state = State.POST_GAME_MODE_NEW_HIGH_SCORE;
+                    } else {
+                        state = State.ATTRACT_MODE_TITLE;
+                        SceneManager.LoadScene(titleScene);
+                    }
+                }
                 break;
 
             case State.GAME_MODE_RESET_PLAYER:
@@ -195,6 +227,7 @@ public class GameStateManager : MonoBehaviour {
                         recorder.StopRecording();
                         recordThisGame = false;
                     }
+                    numberOfLevelsPlayed++;
                 }
                 if (framesInState == 0) {
                     PlayerPrefs.SetInt("Score", GetScoreObject().Get());
@@ -214,14 +247,29 @@ public class GameStateManager : MonoBehaviour {
                     }
                 }
                 if (framesInState == 30) {// about 1/2 second
-                    state = State.GAME_MODE_START_LEVEL;
+                    if (numberOfLevelsPlayed == 2) {
+                        state = GameStateManager.State.GAME_MODE_CUTSCENE;
+                    } else {
+                        state = GameStateManager.State.GAME_MODE_START_LEVEL;
+                    }
                 }
                 break;
 
             case State.GAME_MODE_CUTSCENE:
+                if (framesInState == 0) {
+                    if (numberOfLevelsPlayed == 2) {
+                        SceneManager.LoadScene("Cutscene1");
+                    }
+                }
                 break;
+
             case State.GAME_MODE_OPTIONS:
+                if (framesInState == 0) {//if beginning of state
+                    SceneManager.LoadSceneAsync("Options",
+                    LoadSceneMode.Additive);
+                }
                 break;
+
             case State.POST_GAME_MODE_NEW_HIGH_SCORE:
                 break;
             case State.POST_GAME_MODE_HIGH_SCORES:

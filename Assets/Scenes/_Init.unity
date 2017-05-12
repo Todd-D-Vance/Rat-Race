@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b969ca2b7f33f74fbe49693bfc1e2ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  paused: 0
 --- !u!82 &300211510
 AudioSource:
   m_ObjectHideFlags: 0
@@ -859,6 +860,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recordThisGame: 0
+  numberOfLivesRemaining: 0
   state: 1
   timeInState: 0
   framesInState: 0
@@ -866,6 +868,8 @@ MonoBehaviour:
   descriptionScene: Description
   highScoreScene: HighScores
   demoScene: Demo
+  gameOverPrefab: {fileID: 1489084210394332, guid: eaf7775d0038db44bb5dc4de39db206b,
+    type: 2}
 --- !u!1 &1416079745
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,4 +30,14 @@ public class Options : MonoBehaviour {
     public void ChangeMusicVolume() {
         preferences.musicVolume = musicVolumeControl.value;
     }
+
+    public void Quit() {
+        Debug.Log("Quit button pressed");
+        SceneManager.UnloadSceneAsync("Options");
+        //go to game over scene if in game mode options
+        if (gsm.state == GameStateManager.State.GAME_MODE_OPTIONS) {
+            gsm.state = GameStateManager.State.GAME_MODE_GAME_OVER;
+        }
+        Application.Quit();
+    }
 }

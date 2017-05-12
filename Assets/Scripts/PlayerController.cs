@@ -37,12 +37,7 @@ public class PlayerController : MonoBehaviour {
         int dx, dy;
         GetInput(out dx, out dy);
         Move(dx, dy);
-
-        if (gsm.state == GameStateManager.State.GAME_MODE_DEATH) {
-            //TODO: play death sound, do death animation
-            Invoke("ResetPlayer", 1.0f);
-        }
-
+       
         if (aCat.flee > 0) {
             transform.localScale = new Vector3(2, 2, 2);
             theCollider.size = new Vector2(1.35f, 1.35f);
@@ -148,14 +143,6 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public void ResetPlayer() {
-        gsm.state = GameStateManager.State.GAME_MODE_RESET_PLAYER;
-        transform.position = initialPosition;
-        transform.eulerAngles = initialRotation;
-        foreach(AIController enemy in FindObjectsOfType<AIController>()) {
-            enemy.ResetEnemy();
-        }
-    }
 
     public void DoubleCatValue() {
         catValue *= 2;

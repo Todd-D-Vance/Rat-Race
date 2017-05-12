@@ -7,6 +7,8 @@ public class MusicPlayer : MonoBehaviour {
 
     public static MusicPlayer instance;
 
+    public bool paused = false;
+
     private Queue<float> pitches = new Queue<float>();
     private Queue<float> durations = new Queue<float>();
 
@@ -30,17 +32,19 @@ public class MusicPlayer : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (timeRemaining <= 0) {
-            if (pitches.Count > 0) {//if any notes remain to be played
-                float pitch = pitches.Dequeue();
-                float duration = durations.Dequeue();
-                source.volume = preferences.musicVolume;
-                source.pitch = pitch;
-                source.Play();
-                timeRemaining = duration;
+        if (!paused) {
+            if (timeRemaining <= 0) {
+                if (pitches.Count > 0) {//if any notes remain to be played
+                    float pitch = pitches.Dequeue();
+                    float duration = durations.Dequeue();
+                    source.volume = preferences.musicVolume;
+                    source.pitch = pitch;
+                    source.Play();
+                    timeRemaining = duration;
+                }
+            } else {
+                timeRemaining -= Time.deltaTime;
             }
-        } else {
-            timeRemaining -= Time.deltaTime;
         }
     }
 
