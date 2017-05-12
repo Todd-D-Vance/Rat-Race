@@ -77,24 +77,28 @@ public class GameStateManager : MonoBehaviour {
                     state = State.ATTRACT_MODE_DESCRIPTION;
                 }
                 break;
+
             case State.ATTRACT_MODE_DESCRIPTION:
                 if (timeInState >= 10.0f) {
                     SceneManager.LoadScene(highScoreScene);
                     state = State.ATTRACT_MODE_HIGH_SCORES;
                 }
                 break;
+
             case State.ATTRACT_MODE_HIGH_SCORES:
                 if (timeInState >= 10.0f) {
                     SceneManager.LoadScene(demoScene);
                     state = State.ATTRACT_MODE_DEMO;
                 }
                 break;
+
             case State.ATTRACT_MODE_DEMO:
                 if (timeInState >= 40.0f) {
                     SceneManager.LoadScene(titleScene);
                     state = State.ATTRACT_MODE_TITLE;
                 }
                 break;
+
             case State.ATTRACT_MODE_OPTIONS:
                 if (framesInState == 0) {//if beginning of state
                     SceneManager.LoadSceneAsync("Options", LoadSceneMode.Additive);
@@ -271,11 +275,34 @@ public class GameStateManager : MonoBehaviour {
                 break;
 
             case State.POST_GAME_MODE_NEW_HIGH_SCORE:
+                if (framesInState == 0) {//if beginning of state
+                    SceneManager.LoadScene("NewHighScore");
+                }
+                if (framesInState == 1800) {
+                    state = State.POST_GAME_MODE_HIGH_SCORES;
+                }
                 break;
+
             case State.POST_GAME_MODE_HIGH_SCORES:
+                if (framesInState == 0) {
+                    SceneManager.LoadScene("HighScores");
+                }
+                if (framesInState == 5) {
+                    FindObjectOfType<ListOfScores>().highlight = placeInHighScoreList;
+                }
+                if (timeInState > 10) {
+                    state = State.ATTRACT_MODE_TITLE;
+                    SceneManager.LoadScene(titleScene);
+                }
                 break;
+
             case State.POST_GAME_MODE_OPTIONS:
+                if (framesInState == 0) {//if beginning of state
+                    SceneManager.LoadSceneAsync("Options",
+                    LoadSceneMode.Additive);
+                }
                 break;
+
             default:
                 throw new UnityException("Unknown Game State");
         }
