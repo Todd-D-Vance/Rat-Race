@@ -1194,6 +1194,8 @@ MonoBehaviour:
   initialPosition: {x: 25, y: 32, z: 0}
   initialRotation: {x: 0, y: 0, z: 0}
   flee: 0
+  pointsPrefab: {fileID: 1079336188099050, guid: 0be8bdc465eb4b3429520b418cec19c2,
+    type: 2}
 --- !u!50 &785074946
 Rigidbody2D:
   serializedVersion: 4
@@ -1504,6 +1506,8 @@ MonoBehaviour:
   initialPosition: {x: 28, y: 32, z: 0}
   initialRotation: {x: 0, y: 0, z: -90}
   flee: 0
+  pointsPrefab: {fileID: 1079336188099050, guid: 0be8bdc465eb4b3429520b418cec19c2,
+    type: 2}
 --- !u!50 &858921795
 Rigidbody2D:
   serializedVersion: 4
@@ -2738,6 +2742,8 @@ MonoBehaviour:
   initialPosition: {x: 19, y: 32, z: 0}
   initialRotation: {x: 0, y: 0, z: 90}
   flee: 0
+  pointsPrefab: {fileID: 1079336188099050, guid: 0be8bdc465eb4b3429520b418cec19c2,
+    type: 2}
 --- !u!95 &1334509211
 Animator:
   serializedVersion: 3
@@ -3499,6 +3505,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114386837398254164, guid: 670a85d13cf46fb48ab3446483a01142,
+        type: 2}
+      propertyPath: pointsPrefab
+      value: 
+      objectReference: {fileID: 1079336188099050, guid: 0be8bdc465eb4b3429520b418cec19c2,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 670a85d13cf46fb48ab3446483a01142, type: 2}
   m_IsPrefabParent: 0

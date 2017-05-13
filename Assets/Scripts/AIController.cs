@@ -8,6 +8,7 @@ public class AIController : MonoBehaviour {
     public Vector3 initialPosition;
     public Vector3 initialRotation;
     public float flee = 0;
+    public GameObject pointsPrefab;
 
     private MazeBuilder maze;
     private Rigidbody2D rb;
@@ -227,9 +228,17 @@ public class AIController : MonoBehaviour {
             if (player && flee > 0) {
                 //Eat the cat!
                 score.Add(player.GetCatValue());
+
+                GameObject g = Instantiate(pointsPrefab);
+                g.transform.position = transform.position;
+                Points p = g.GetComponent<Points>();
+                p.points = player.GetCatValue();
+                p.color = GetComponent<SpriteRenderer>().color;
+
                 player.DoubleCatValue();
                 sound.BigGulp();
                 ResetEnemy();
+                delay = 10;
             } else {
                 gsm.state = GameStateManager.State.GAME_MODE_DEATH;
             }

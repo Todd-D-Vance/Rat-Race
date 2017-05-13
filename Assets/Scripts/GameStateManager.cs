@@ -72,30 +72,50 @@ public class GameStateManager : MonoBehaviour {
                 break;
 
             case State.ATTRACT_MODE_TITLE:
-                if (timeInState >= 10.0f) {
+                if (timeInState >= 10.0f || Input.GetKey("space") || Input.GetKey("right")) {
                     SceneManager.LoadScene(descriptionScene);
                     state = State.ATTRACT_MODE_DESCRIPTION;
+                } else if (Input.GetKey("backspace") || Input.GetKey("left")) {
+                    SceneManager.LoadScene(demoScene);
+                    state = State.ATTRACT_MODE_DEMO;
+                } else if (Input.GetButtonDown("Cancel")) {
+                    state = State.ATTRACT_MODE_OPTIONS;
                 }
                 break;
 
             case State.ATTRACT_MODE_DESCRIPTION:
-                if (timeInState >= 10.0f) {
+                if (timeInState >= 10.0f || Input.GetKey("space") || Input.GetKey("right")) {
                     SceneManager.LoadScene(highScoreScene);
                     state = State.ATTRACT_MODE_HIGH_SCORES;
+                } else if (Input.GetKey("backspace") || Input.GetKey("left")) {
+                    SceneManager.LoadScene(titleScene);
+                    state = State.ATTRACT_MODE_TITLE;
+                } else if (Input.GetButtonDown("Cancel")) {
+                    state = State.ATTRACT_MODE_OPTIONS;
                 }
                 break;
 
             case State.ATTRACT_MODE_HIGH_SCORES:
-                if (timeInState >= 10.0f) {
+                if (timeInState >= 10.0f || Input.GetKey("space") || Input.GetKey("right")) {
                     SceneManager.LoadScene(demoScene);
                     state = State.ATTRACT_MODE_DEMO;
+                } else if (Input.GetKey("backspace") || Input.GetKey("left")) {
+                    SceneManager.LoadScene(descriptionScene);
+                    state = State.ATTRACT_MODE_DESCRIPTION;
+                } else if (Input.GetButtonDown("Cancel")) {
+                    state = State.ATTRACT_MODE_OPTIONS;
                 }
                 break;
 
             case State.ATTRACT_MODE_DEMO:
-                if (timeInState >= 40.0f) {
+                if (timeInState >= 40.0f || Input.GetKey("space") || Input.GetKey("right")) {
                     SceneManager.LoadScene(titleScene);
                     state = State.ATTRACT_MODE_TITLE;
+                } else if (Input.GetKey("backspace") || Input.GetKey("left")) {
+                    SceneManager.LoadScene(highScoreScene);
+                    state = State.ATTRACT_MODE_HIGH_SCORES;
+                } else if (Input.GetButtonDown("Cancel")) {
+                    state = State.ATTRACT_MODE_OPTIONS;
                 }
                 break;
 
@@ -122,6 +142,7 @@ public class GameStateManager : MonoBehaviour {
                         GetScoreObject().Reset();
                         music.PlayTune("R4 O3 B- B- B- B- R8 O5 E- E- D E- F G F E- O3 B- O5 E- O4 E-");
                     }
+                    GetHighScoreObject().Set(highScores.GetScore(1));
                 }
                 if (timeInState > 3f) {//TODO make dots draw before PLAY mode
                     state = State.GAME_MODE_PLAY;
@@ -149,6 +170,10 @@ public class GameStateManager : MonoBehaviour {
                 if (framesInState == 10) {
                     if (music) {
                         music.PlayTune("R8 O4 G G G G G");
+                    }
+                    GetHighScoreObject().Set(highScores.GetScore(1));
+                    if (PlayerPrefs.GetInt("Score") > GetHighScoreObject().Get()) {
+                        GetHighScoreObject().Set(PlayerPrefs.GetInt("Score"));
                     }
                 }
                 if (framesInState == 0) {
@@ -320,6 +345,16 @@ public class GameStateManager : MonoBehaviour {
         }
         throw new UnityException("Score object not found");
     }
+
+    Score GetHighScoreObject() {
+        foreach (Score s in FindObjectsOfType<Score>()) {
+            if (s.gameObject.name != "Score") {
+                return s;
+            }
+        }
+        throw new UnityException("High Score object not found");
+    }
+
 
     public enum State {
         INVALID,

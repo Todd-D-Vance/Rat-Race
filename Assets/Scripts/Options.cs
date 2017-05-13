@@ -18,6 +18,13 @@ public class Options : MonoBehaviour {
         sfxVolumeControl.value = preferences.sfxVolume;
     }
 
+    // Update is called once per frame
+    void Update() {
+        if (Input.GetButtonDown("Cancel")) {
+            Return();
+        }
+    }
+
     public void Return() {
         SceneManager.UnloadSceneAsync("Options");
         gsm.LoadPreviousState();
