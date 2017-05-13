@@ -17,6 +17,7 @@ public class GameStateManager : MonoBehaviour {
     public string highScoreScene = "HighScores";
     public string demoScene = "Demo";
     public GameObject gameOverPrefab;
+    public GameObject pbPrefab;
     public int placeInHighScoreList = 0;
 
     private MusicPlayer music;
@@ -161,6 +162,18 @@ public class GameStateManager : MonoBehaviour {
                     Dots dots = FindObjectOfType<Dots>();
                     if (dots && dots.CountDots() <= 0) {
                         state = State.GAME_MODE_END_LEVEL;
+                    }
+                }
+                if (timeInState > 10f) {//wait till game is underway
+                    Pickup p = FindObjectOfType<Pickup>();
+                    if (!p) {//make sure there isn't a pickup already
+                        if (UnityEngine.Random.value < 1f / (60f * 60f)) {
+                            //every 3600 frames give or take (about every 60 seconds, but at random times)
+                            //spawn a pickup
+                            GameObject g = Instantiate(pbPrefab);
+                            //place it near where the player started
+                            g.transform.position = new Vector3(33, 27);
+                        }
                     }
                 }
                 break;
