@@ -289,7 +289,7 @@ public class GameStateManager : MonoBehaviour {
                     }
                 }
                 if (framesInState == 30) {// about 1/2 second
-                    if (numberOfLevelsPlayed == 2) {
+                    if (numberOfLevelsPlayed == 2 || numberOfLevelsPlayed == 4) {
                         state = GameStateManager.State.GAME_MODE_CUTSCENE;
                     } else {
                         state = GameStateManager.State.GAME_MODE_START_LEVEL;
@@ -301,6 +301,9 @@ public class GameStateManager : MonoBehaviour {
                 if (framesInState == 0) {
                     if (numberOfLevelsPlayed == 2) {
                         SceneManager.LoadScene("Cutscene1");
+                    }
+                    if (numberOfLevelsPlayed == 4) {
+                        SceneManager.LoadScene("Cutscene2");
                     }
                 }
                 break;
