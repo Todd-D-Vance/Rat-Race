@@ -10,6 +10,9 @@ public class AIController : MonoBehaviour {
     public float flee = 0;
     public GameObject pointsPrefab;
 
+    public float delay = 0;
+
+
     private MazeBuilder maze;
     private Rigidbody2D rb;
     private PlayerController player;
@@ -23,7 +26,6 @@ public class AIController : MonoBehaviour {
 
     private int initDx = 0;
     private int initDy = 0;
-    private float delay = 0;
     private bool deployed = false;
     private int randomGoalX = 2;
     private int randomGoalY = 2;
